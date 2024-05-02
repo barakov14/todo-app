@@ -1,1 +1,29 @@
-<p>sidenav works!</p>
+<div class="container">
+  <tasks-create-button></tasks-create-button>
+  <ul class="menu">
+    <li class="menu__item">
+      <i class="ri-mail-line"></i>
+      <a>Мои задачи</a>
+    </li>
+    <li class="menu__item">
+      <i class="ri-star-line"></i>
+      <a>Важные</a>
+    </li>
+    <li class="menu__item">
+      <i class="ri-check-line"></i>
+      <a>Выполненные</a>
+    </li>
+    <li class="menu__item">
+      <i class="ri-delete-bin-7-line"></i>
+      <a>Удаленные</a>
+    </li>
+  </ul>
+  <div class="tags">
+    <p class="tags__title">Тэги</p>
+    <ul *ngFor="let item of tags">
+      <li class="tags__item">
+        <ui-tag [tag]="item.tag"></ui-tag>
+      </li>
+    </ul>
+  </div>
+</div>

@@ -1,0 +1,9 @@
+<div class="block">
+  <input
+    type="text"
+    class="input"
+    [placeholder]="placeholder || ''"
+    [ngClass]="{'input-error': error}"
+  >
+  <p class="error">{{ error }}</p>
+</div>

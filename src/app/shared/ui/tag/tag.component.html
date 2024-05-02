@@ -1,4 +1,13 @@
-<div>
-  <i class="ri-checkbox-blank-circle-fill"></i>
-
+<div class="container" tabindex="0">
+  <i class="ri-checkbox-blank-circle-fill"
+     [ngClass]="{
+      'productivity': tag === 'Продуктивность',
+      'education': tag === 'Образование',
+      'health': tag === 'Здоровье',
+      'argent': tag === 'Срочно'
+     }"
+  ></i>
+  <p>
+    {{ tag }}
+  </p>
 </div>
