@@ -17,13 +17,13 @@ export class BadgeDirective implements OnInit {
   private badgeTextColor() {
     switch (this.badge) {
       case 'Продуктивность':
-        return '#2772081F';
+        return '#7367F0';
       case 'Образование':
-        return '#28C76F1F';
+        return '#28C76F';
       case 'Здоровье':
-        return '#FF9F431F';
+        return '#FF9F43';
       case 'Срочно':
-        return '#EA54551F';
+        return '#EA5455';
       default:
         return '#fff'
     }
@@ -32,13 +32,13 @@ export class BadgeDirective implements OnInit {
   private badgeBgColor() {
     switch (this.badge) {
       case 'Продуктивность':
-        return '#7367F0';
+        return '#2772081F';
       case 'Образование':
-        return '#28C76F';
+        return '#28C76F1F';
       case 'Здоровье':
-        return '#FF9F43';
+        return '#FF9F431F';
       case 'Срочно':
-        return '#EA5455';
+        return '#EA54551F';
       default:
         return '#fff'
     }
@@ -55,6 +55,7 @@ export class BadgeDirective implements OnInit {
     badgeElement.style.color = badgeTextColor
     badgeElement.style.borderRadius = '17px'
     badgeElement.style.padding = '1px 9px'
+    badgeElement.style.fontSize = '12px'
 
     this.elementRef.nativeElement.appendChild(badgeElement)
   }

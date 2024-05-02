@@ -1,0 +1,38 @@
+.block {
+  display: flex;
+  flex-direction: column;
+}
+.input {
+  border: 1px solid #3B4253;
+  border-radius: 5px;
+  color: #E0E0E0;
+  padding: 7px 14px;
+  width: 259px;
+  height: 38px;
+  background: none;
+  outline: none;
+}
+
+.input::placeholder {
+  color: #676D7D;
+}
+
+.input:focus {
+  border-color: #3B4253;
+}
+
+.input-error {
+  border: 1px solid #EB5757;
+  color: #EB5757;
+}
+
+.input-error:focus {
+  border: 1px solid #EB5757;
+  color: #EB5757;
+}
+
+.error {
+  color: #EB5757;
+  margin-top: 7px;
+  font-size: 12px;
+}
