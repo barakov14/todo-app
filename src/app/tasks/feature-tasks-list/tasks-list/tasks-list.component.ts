@@ -1,13 +1,20 @@
 import {
   ChangeDetectionStrategy,
-  Component,
-  EventEmitter,
-  Input,
-  Output
+  Component, EventEmitter, inject,
+  Input, Output,
 } from '@angular/core';
-import {CdkDrag, CdkDragDrop, CdkDropList} from "@angular/cdk/drag-drop";
-import {NgFor} from "@angular/common";
+import {CdkDrag, CdkDragDrop, CdkDragHandle, CdkDropList, moveItemInArray} from "@angular/cdk/drag-drop";
+import {AsyncPipe, DatePipe, NgClass, NgFor, NgIf} from "@angular/common";
 import {SearchInputComponent} from "../../../shared/ui/search-input/search-input.component";
+import {Task} from "../../../core/api-types/task";
+import {MatCheckbox} from "@angular/material/checkbox";
+import {TagComponent} from "../../../shared/ui/tag/tag.component";
+import {BadgeComponent} from "../../../shared/ui/badge/badge.component";
+import {TasksDeleteButtonComponent} from "../../feature-tasks-delete/tasks-delete-button/tasks-delete-button.component";
+import {MatDivider} from "@angular/material/divider";
+import {BehaviorSubject, Observable} from "rxjs";
+import {HighlightDirective} from "../../../core/directives/highlight.directive";
+import {PersistenceService} from "../../../core/utils/persistence.service";
 
 @Component({
   selector: 'tasks-list',
@@ -16,7 +23,18 @@ import {SearchInputComponent} from "../../../shared/ui/search-input/search-input
     CdkDropList,
     NgFor,
     CdkDrag,
-    SearchInputComponent
+    SearchInputComponent,
+    MatCheckbox,
+    TagComponent,
+    BadgeComponent,
+    DatePipe,
+    TasksDeleteButtonComponent,
+    MatDivider,
+    NgClass,
+    CdkDragHandle,
+    NgIf,
+    AsyncPipe,
+    HighlightDirective
   ],
   templateUrl: './tasks-list.component.html',
   styleUrl: './tasks-list.component.scss',
@@ -24,16 +42,37 @@ import {SearchInputComponent} from "../../../shared/ui/search-input/search-input
 })
 export class TasksListComponent {
   @Input() currentTasksPage!: string | null
-  @Input() tasksList!: string[]
+  @Input() tasksList!: Task[] | null
+  @Input() selectedTags!: string[] | null | undefined
+  @Output() filter = new EventEmitter<string>()
 
-  @Output() taskDrop = new EventEmitter<CdkDragDrop<string[]>>()
-  @Output() datePick = new EventEmitter<Date>()
+  private readonly persistenceService = inject(PersistenceService)
+
+  public filterChanges = new BehaviorSubject<string>('')
+
+  private currentTasksPageCopy = ''
 
   drop(event: CdkDragDrop<string[]>) {
-    this.taskDrop.emit(event)
+    moveItemInArray(this.tasksList as Task[], event.previousIndex, event.currentIndex);
   }
 
-  onDatePick(event: Date) {
-    this.datePick.emit(event)
+  areAnyTagsSelected(): Task[] {
+    if (this.selectedTags!.length > 0) {
+      return this.tasksList!.filter((task) => {
+        return task.tags.some((tag) => this.selectedTags?.includes(tag));
+      });
+    }
+    return this.tasksList!;
+  }
+
+  onSearch(filter: string) {
+    this.filter.emit(filter);
+    this.filterChanges.next(filter);
+
+    this.currentTasksPageCopy = this.currentTasksPage as string;
+
+    if (filter) {
+      this.currentTasksPage = 'Результаты поиска';
+    }
   }
 }

@@ -18,7 +18,14 @@
           Название
         </div>
         <div class="form-field__input">
-          <input type="text" placeholder="Название задачи" formControlName="name" ui-input [required]="!formGroup.value.name" errorText="Обязательное поле">
+          <input
+            type="text"
+            placeholder="Название задачи"
+            formControlName="name"
+            ui-input
+            [required]="(validatorsError | async)! && !(formGroup.controls.name.valueChanges | async)"
+            errorText="Обязательное поле"
+          >
         </div>
       </div>
       <div class="form-field">
@@ -37,7 +44,9 @@
             placeholder="Описание задачи"
             class="form-field__input__description"
             formControlName="description"
-            ui-input
+            ui-textarea
+            [required]="(validatorsError | async)! && !(formGroup.controls.description.valueChanges | async)"
+            errorText="Обязательное поле"
           ></textarea>
         </div>
       </div>
@@ -53,7 +62,7 @@
       </div>
       <div class="form__actions">
         <div>
-          <ui-button-filled (click)="onCreate()">Добавить</ui-button-filled>
+          <ui-button-filled (click)="onCreateTask()">Добавить</ui-button-filled>
         </div>
         <div>
           <ui-button-outline>Удалить</ui-button-outline>

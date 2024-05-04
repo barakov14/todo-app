@@ -1,11 +1,11 @@
-import {AfterViewInit, Directive, ElementRef, inject, Input, OnInit, Renderer2} from "@angular/core";
+import {AfterViewInit, Directive, DoCheck, ElementRef, inject, Input, OnInit, Renderer2} from "@angular/core";
 
 @Directive({
-  selector: '[ui-input]',
+  selector: '[ui-textarea]',
   standalone: true
 })
 
-export class InputDirective implements OnInit {
+export class TextareaDirective implements OnInit, DoCheck {
   private readonly elementRef = inject(ElementRef)
   private readonly renderer = inject(Renderer2)
 
@@ -51,7 +51,7 @@ export class InputDirective implements OnInit {
 
   private errorStyles() {
     const inputElement = this.elementRef.nativeElement;
-    this.renderer.addClass(inputElement, 'input');
+    this.renderer.addClass(inputElement, 'textarea');
     inputElement.style.border = '1px solid #EB5757';
 
     inputElement.addEventListener('focus', () => {
@@ -62,7 +62,7 @@ export class InputDirective implements OnInit {
   private defaultStyles() {
     const inputElement = this.elementRef.nativeElement;
 
-    this.renderer.addClass(inputElement, 'input');
+    this.renderer.addClass(inputElement, 'textarea');
     inputElement.style.border = '1px solid #3B4253';
     inputElement.style.borderRadius = '5px';
     inputElement.style.color = '#E0E0E0';

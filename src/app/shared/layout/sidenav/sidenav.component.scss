@@ -14,11 +14,12 @@
   display: flex;
   align-items: center;
   cursor: pointer;
+  position: relative;
 }
 .menu__item:not(:last-child) {
   margin-bottom: 20px;
 }
-.menu__item a {
+.menu__item p {
   margin-left: 10px;
 }
 
@@ -31,7 +32,7 @@
   transition: ease-in 0.2s;
 }
 
-.menu__item a:hover {
+.menu__item p:hover {
   color: #9B51E0;
   transition: ease-in 0.2s;
 }
@@ -66,4 +67,25 @@ ul {
   right: 0;
   width: 1px; /* Ширина линии */
   background-color: #31394C; /* Цвет линии */
+}
+
+.selected {
+  border: 1px solid #9B51E0;
+  border-radius: 5px;
+  max-width: 190px;
+  padding: 10px;
+}
+
+.active-link {
+  color: #9B51E0;
+}
+
+.active-link::after {
+  content: ''; /* Добавляем псевдоэлемент для вертикального подчеркивания */
+  position: absolute; /* Позиционируем его абсолютно */
+  bottom: 0; /* Помещаем внизу */
+  left: -20px; /* Выравниваем по левому краю */
+  width: 3px; /* Ширина подчеркивания */
+  height: 100%; /* Высота равна высоте текста */
+  background-color: #9B51E0; /* Цвет подчеркивания */
 }

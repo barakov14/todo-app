@@ -1,5 +1,6 @@
 <tasks-list
   [currentTasksPage]="currentTasksPage | async"
-  (taskDrop)="drop($event)"
-  (datePick)="onDatePick($event)"
+  [tasksList]="tasksList | async"
+  [selectedTags]="selectedTags | async"
+  (filter)="filter($event)"
 ></tasks-list>

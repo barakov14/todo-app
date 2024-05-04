@@ -1,28 +1,28 @@
 <div class="container">
   <tasks-create-button></tasks-create-button>
   <ul class="menu">
-    <li class="menu__item">
+    <li class="menu__item" [routerLink]="['/мои задачи']" routerLinkActive="active-link">
       <i class="ri-mail-line"></i>
-      <a [routerLink]="['/мои задачи']">Мои задачи</a>
+      <p>Мои задачи</p>
     </li>
-    <li class="menu__item">
+    <li class="menu__item" [routerLink]="['/важные задачи']" routerLinkActive="active-link">
       <i class="ri-star-line"></i>
-      <a [routerLink]="['/важные задачи']">Важные</a>
+      <p>Важные</p>
     </li>
-    <li class="menu__item">
+    <li class="menu__item" [routerLink]="['/выполненные']" routerLinkActive="active-link">
       <i class="ri-check-line"></i>
-      <a [routerLink]="['/выполненные']">Выполненные</a>
+      <p>Выполненные</p>
     </li>
-    <li class="menu__item">
+    <li class="menu__item" [routerLink]="['/удаленные']" routerLinkActive="active-link">
       <i class="ri-delete-bin-7-line"></i>
-      <a [routerLink]="['/удаленные']">Удаленные</a>
+      <p>Удаленные</p>
     </li>
   </ul>
   <div class="tags">
     <p class="tags__title">Тэги</p>
     <ul *ngFor="let item of tags">
-      <li class="tags__item">
-        <ui-tag [tag]="item.tag"></ui-tag>
+      <li class="tags__item" [ngClass]="{'selected': isSelected(item.tag)}">
+        <ui-tag [tag]="item.tag" (click)="onToggleTag(item.tag)"></ui-tag>
       </li>
     </ul>
   </div>

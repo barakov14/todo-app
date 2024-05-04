@@ -1,13 +1,37 @@
 <div class="container">
   <div class="tasks">
-    <ui-search-input></ui-search-input>
+    <ui-search-input (onSearch)="onSearch($event)"></ui-search-input>
     <h2>{{ currentTasksPage }}</h2>
     <div class="tasks-list">
-      <!--<div cdkDropList class="example-list" (cdkDropListDropped)="drop($event)">
-        <div class="example-box" *ngFor="let task of tasksList" cdkDrag>
-          <ui-checkbox></ui-checkbox>
+      <div cdkDropList class="tasks-list" (cdkDropListDropped)="drop($event)">
+        <div class="" *ngFor="let task of areAnyTagsSelected()" cdkDrag>
+          <ng-container *ngIf="task">
+            <div class="tasks-list__item">
+              <div class="tasks-list__item__name">
+                <mat-checkbox>
+                </mat-checkbox>
+                <div class="name" highlight [search]="filterChanges | async" [ngClass]="{'important': task.isImportant}" [innerHtml]="task.name">
+                </div>
+              </div>
+              <div class="tasks-list__item__badge">
+                <div *ngFor="let tag of task.tags">
+                  <ui-badge [badge]="tag"></ui-badge>
+                </div>
+              </div>
+              <div class="tasks-list__item__footer">
+                <div class="tasks-list__item__footer__date">
+                  {{ task.date | date: 'HH:mm / dd.MM.yyyy' }}
+                </div>
+                <div class="tasks-list__item__footer__actions">
+                  <tasks-delete-button [taskName]="task.name"></tasks-delete-button>
+                  <i class="ri-draggable" cdkDragHandle></i>
+                </div>
+              </div>
+            </div>
+            <mat-divider></mat-divider>
+          </ng-container>
         </div>
-      </div>-->
+      </div>
     </div>
   </div>
 </div>

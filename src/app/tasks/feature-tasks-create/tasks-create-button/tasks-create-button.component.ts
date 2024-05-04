@@ -3,6 +3,8 @@ import {ButtonFilledComponent} from "../../../shared/ui/button-filled/button-fil
 import {MatDialog, MatDialogRef} from "@angular/material/dialog";
 import {TasksCreateDialogComponent} from "../tasks-create-dialog/tasks-create-dialog.component";
 import {takeUntilDestroyed} from "@angular/core/rxjs-interop";
+import {CreateTask} from "../../../core/api-types/task";
+import {TasksService} from "../../data-access/tasks.service";
 
 @Component({
   selector: 'tasks-create-button',
@@ -17,6 +19,7 @@ import {takeUntilDestroyed} from "@angular/core/rxjs-interop";
 export class TasksCreateButtonComponent {
   private readonly dialog = inject(MatDialog)
   private readonly destroyRef = inject(DestroyRef)
+  private readonly tasksService = inject(TasksService)
 
 
   openTasksCreateDialog() {
@@ -29,6 +32,12 @@ export class TasksCreateButtonComponent {
       .pipe(
         takeUntilDestroyed(this.destroyRef)
       )
-      .subscribe()
+      .subscribe(
+        (data: CreateTask) => {
+          if(data) {
+            this.tasksService.setTasksList(data)
+          }
+        }
+      )
   }
 }

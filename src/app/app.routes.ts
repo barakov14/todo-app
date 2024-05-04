@@ -14,10 +14,5 @@ export const routes: Routes = [
             .then((c) => c.TasksListContainerComponent)
       }
     ]
-  },
-  {
-    path: '**',
-    redirectTo: '/mytasks',
-    pathMatch: 'full'
   }
 ];

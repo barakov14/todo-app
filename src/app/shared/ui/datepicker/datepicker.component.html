@@ -1,5 +1,5 @@
 <div class="input-container">
-  <input type="text" class="datepicker" placeholder="Дата" [matDatepicker]="picker">
+  <input type="text" class="datepicker" [formControl]="date" placeholder="Дата" [matDatepicker]="picker" (dateChange)="onDateChanged()">
   <i class="ri-calendar-line" (click)="picker.open()"></i>
 </div>
 <mat-datepicker #picker type="datetime" openOnFocus="true" timeInterval="5"></mat-datepicker>

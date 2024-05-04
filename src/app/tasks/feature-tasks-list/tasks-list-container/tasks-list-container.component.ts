@@ -1,4 +1,4 @@
-import {ChangeDetectionStrategy, Component, DestroyRef, inject} from '@angular/core';
+import {ChangeDetectionStrategy, Component, DestroyRef, inject, OnInit} from '@angular/core';
 import {TasksListComponent} from "../tasks-list/tasks-list.component";
 import {ActivatedRoute, Params} from "@angular/router";
 import {takeUntilDestroyed} from "@angular/core/rxjs-interop";
@@ -6,6 +6,8 @@ import {StringService} from "../../../core/utils/string.service";
 import {TasksService} from "../../data-access/tasks.service";
 import {AsyncPipe} from "@angular/common";
 import {CdkDragDrop, moveItemInArray} from "@angular/cdk/drag-drop";
+import {Task} from "../../../core/api-types/task";
+import {BehaviorSubject, Observable} from "rxjs";
 
 @Component({
   selector: 'tasks-list-container',
@@ -18,13 +20,17 @@ import {CdkDragDrop, moveItemInArray} from "@angular/cdk/drag-drop";
   styleUrl: './tasks-list-container.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class TasksListContainerComponent {
+export class TasksListContainerComponent implements OnInit {
   private readonly route = inject(ActivatedRoute)
   private readonly tasksService = inject(TasksService)
   private readonly destroyRef = inject(DestroyRef)
   private readonly stringService = inject(StringService)
 
   public currentTasksPage = this.tasksService.currentTasksPage
+
+  public tasksList = this.tasksService.filteredTasksList
+
+  public selectedTags = new BehaviorSubject<string[]>([])
 
   constructor() {
     this.route.params.pipe(
@@ -33,13 +39,21 @@ export class TasksListContainerComponent {
       const page = params['task']
       this.currentTasksPage.next(this.stringService.capitalizeFirstLetter(page))
     })
+
+    this.route.queryParams.pipe(
+      takeUntilDestroyed(this.destroyRef)
+    ).subscribe((queryParams) => {
+      this.selectedTags.next(queryParams['tag'] ? Array.isArray(queryParams['tag']) ? queryParams['tag'] : [queryParams['tag']] : [])
+    })
   }
 
-  drop(event: CdkDragDrop<string[]>) {
-    // moveItemInArray(this.movies, event.previousIndex, event.currentIndex);
+  ngOnInit() {
+    this.tasksService.getTasksList()
   }
 
-  onDatePick(date: Date) {
-
+  filter(filter: string) {
+    this.tasksService.filterTasks(filter)
   }
+
+  protected readonly event = event;
 }
