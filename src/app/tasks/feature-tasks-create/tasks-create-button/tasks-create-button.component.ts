@@ -1,5 +1,8 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import {ChangeDetectionStrategy, Component, DestroyRef, inject} from '@angular/core';
 import {ButtonFilledComponent} from "../../../shared/ui/button-filled/button-filled.component";
+import {MatDialog, MatDialogRef} from "@angular/material/dialog";
+import {TasksCreateDialogComponent} from "../tasks-create-dialog/tasks-create-dialog.component";
+import {takeUntilDestroyed} from "@angular/core/rxjs-interop";
 
 @Component({
   selector: 'tasks-create-button',
@@ -12,5 +15,20 @@ import {ButtonFilledComponent} from "../../../shared/ui/button-filled/button-fil
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class TasksCreateButtonComponent {
+  private readonly dialog = inject(MatDialog)
+  private readonly destroyRef = inject(DestroyRef)
 
+
+  openTasksCreateDialog() {
+    const dialogRef: MatDialogRef<TasksCreateDialogComponent> =
+      this.dialog.open(TasksCreateDialogComponent, {
+        hasBackdrop: true,
+        panelClass: 'dialog-no-shadow'
+      })
+    dialogRef.afterClosed()
+      .pipe(
+        takeUntilDestroyed(this.destroyRef)
+      )
+      .subscribe()
+  }
 }

@@ -1,0 +1,87 @@
+.dialog {
+  position: fixed;
+  top: 0;
+  right: 0;
+  min-height: 100vh;
+  width: 310px;
+  background-color: #283046;
+}
+
+.dialog-open {
+  animation: slideInRight 0.5s forwards;
+}
+.header {
+  background-color: #161D31;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 15px;
+}
+.title {
+  color: #D0D2D6;
+}
+.header__actions {
+  font-size: 16px;
+}
+
+.header__actions i:hover {
+  cursor: pointer;
+  transition: 0.2s ease-in;
+  opacity: 0.7;
+}
+
+.header__actions i:not(:last-child) {
+  margin-right: 0.5rem;
+}
+
+.form-field:not(:last-child) {
+  margin-bottom: 1rem;
+}
+
+.form {
+  padding: 1.2rem;
+}
+
+.ri-star-fill {
+  color: #FF9F43;
+}
+
+
+.form-field__checkbox {
+  display: flex;
+}
+
+.form__actions {
+  display: flex;
+  align-items: center;
+}
+
+.form__actions div:not(:last-child) {
+  margin-right: 1rem;
+}
+
+.form-field__input__description {
+  padding-bottom: 100px !important;
+}
+
+.form-field__title {
+  margin-bottom: 10px;
+}
+
+.form-field__checkbox {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.form-field__checkbox__column__element {
+  margin-bottom: 10px; /* Add some margin between elements */
+}
+
+@keyframes slideInRight {
+  from {
+    transform: translateX(100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}

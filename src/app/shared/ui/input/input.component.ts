@@ -1,11 +1,11 @@
-import {ChangeDetectionStrategy, Component, Input} from '@angular/core';
+import {ChangeDetectionStrategy, Component, input, Input} from '@angular/core';
 import {NgClass} from "@angular/common";
 
 @Component({
   selector: 'ui-input',
   standalone: true,
   imports: [
-    NgClass
+    NgClass,
   ],
   templateUrl: './input.component.html',
   styleUrl: './input.component.scss',

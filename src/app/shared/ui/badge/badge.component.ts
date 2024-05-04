@@ -1,4 +1,4 @@
-import {ChangeDetectionStrategy, Component, Input} from '@angular/core';
+import {ChangeDetectionStrategy, Component, Input, input} from '@angular/core';
 import {BadgeDirective} from "./badge.directive";
 
 @Component({
@@ -12,5 +12,5 @@ import {BadgeDirective} from "./badge.directive";
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class BadgeComponent {
-  @Input() badge!: string
+  @Input() badge!:string
 }

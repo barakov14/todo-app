@@ -1,1 +1,64 @@
-<p>tasks-create-dialog works!</p>
+<div class="dialog dialog-open">
+  <form [formGroup]="formGroup">
+    <div class="header">
+      <div class="title">Задача</div>
+      <div class="header__actions">
+        <ng-container *ngIf="!isFavorite; else favorite">
+          <i class="ri-star-line" (click)="onFavorite()"></i>
+        </ng-container>
+        <ng-template #favorite>
+          <i class="ri-star-fill" (click)="onFavorite()"></i>
+        </ng-template>
+        <i class="ri-close-large-fill" mat-dialog-close></i>
+      </div>
+    </div>
+    <div class="form">
+      <div class="form-field">
+        <div class="form-field__title">
+          Название
+        </div>
+        <div class="form-field__input">
+          <input type="text" placeholder="Название задачи" formControlName="name" ui-input [required]="!formGroup.value.name" errorText="Обязательное поле">
+        </div>
+      </div>
+      <div class="form-field">
+        <mat-checkbox formControlName="isImportant">Важная задача</mat-checkbox>
+      </div>
+      <div class="form-field">
+        <div class="form-field__title">Дата и время окончания</div>
+        <div class="form-field__input">
+          <ui-datepicker (dateChanged)="onPickDate($event)"></ui-datepicker>
+        </div>
+      </div>
+      <div class="form-field">
+        <div class="form-field__title">Описание задачи</div>
+        <div class="form-field__input">
+          <textarea
+            placeholder="Описание задачи"
+            class="form-field__input__description"
+            formControlName="description"
+            ui-input
+          ></textarea>
+        </div>
+      </div>
+      <div class="form-field">
+        <div class="form-field__title">Тэги</div>
+        <div class="form-field__checkbox">
+          <div class="form-field__checkbox__column" *ngFor="let element of tags">
+            <div class="form-field__checkbox__column__element">
+              <mat-checkbox (click)="onToggleTag(element.tag)">{{ element.tag }}</mat-checkbox>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="form__actions">
+        <div>
+          <ui-button-filled (click)="onCreate()">Добавить</ui-button-filled>
+        </div>
+        <div>
+          <ui-button-outline>Удалить</ui-button-outline>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>

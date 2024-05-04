@@ -2,4 +2,4 @@
   <input type="text" class="datepicker" placeholder="Дата" [matDatepicker]="picker">
   <i class="ri-calendar-line" (click)="picker.open()"></i>
 </div>
-<mat-datepicker #picker></mat-datepicker>
+<mat-datepicker #picker type="datetime" openOnFocus="true" timeInterval="5"></mat-datepicker>

@@ -6,6 +6,7 @@ import {tags} from "../../../core/mock/tags.mock";
 import {
   TasksCreateButtonComponent
 } from "../../../tasks/feature-tasks-create/tasks-create-button/tasks-create-button.component";
+import {RouterLink} from "@angular/router";
 
 @Component({
   selector: 'sidenav',
@@ -14,7 +15,8 @@ import {
     ButtonFilledComponent,
     TagComponent,
     NgForOf,
-    TasksCreateButtonComponent
+    TasksCreateButtonComponent,
+    RouterLink
   ],
   templateUrl: './sidenav.component.html',
   styleUrl: './sidenav.component.scss',

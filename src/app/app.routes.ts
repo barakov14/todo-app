@@ -8,11 +8,16 @@ export const routes: Routes = [
         .then((c) => c.HomeComponent),
     children: [
       {
-        path: 'my/:task',
+        path: ':task',
         loadComponent: () =>
           import('./tasks/feature-tasks-list/tasks-list-container/tasks-list-container.component')
             .then((c) => c.TasksListContainerComponent)
       }
     ]
+  },
+  {
+    path: '**',
+    redirectTo: '/mytasks',
+    pathMatch: 'full'
   }
 ];

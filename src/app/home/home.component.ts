@@ -7,7 +7,7 @@ import {RouterOutlet} from "@angular/router";
   standalone: true,
   imports: [
     SidenavComponent,
-    RouterOutlet
+    RouterOutlet,
   ],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss',

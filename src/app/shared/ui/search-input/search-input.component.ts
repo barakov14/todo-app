@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 
 @Component({
-  selector: 'search-input',
+  selector: 'ui-search-input',
   standalone: true,
   imports: [],
   templateUrl: './search-input.component.html',

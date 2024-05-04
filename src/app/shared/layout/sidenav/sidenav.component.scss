@@ -31,6 +31,11 @@
   transition: ease-in 0.2s;
 }
 
+.menu__item a:hover {
+  color: #9B51E0;
+  transition: ease-in 0.2s;
+}
+
 .tags {
   margin-top: 30px;
   display: flex;
