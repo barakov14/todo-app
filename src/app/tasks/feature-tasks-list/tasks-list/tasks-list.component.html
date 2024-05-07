@@ -4,9 +4,9 @@
     <h2>{{ currentTasksPage }}</h2>
     <div class="tasks-list">
       <div cdkDropList class="tasks-list" (cdkDropListDropped)="drop($event)">
-        <div class="" *ngFor="let task of areAnyTagsSelected()" cdkDrag>
-          <ng-container *ngIf="task && currentTasksPage && taskIncluded(task, currentTasksPage)">
-            <div class="tasks-list__item" *ngIf="showNotDeletedTasks(currentTasksPage, task)" [ngClass]="{'deleted-page': !notInDeletedPage(currentTasksPage)}">
+        <div class="" *ngFor="let task of areAnyTagsSelected() | slice:0:(currentPage + 1) * itemsPerPage" cdkDrag>
+          <ng-container *ngIf="task && currentTasksPage && taskIncluded(currentTasksPage, task)">
+            <div class="tasks-list__item" *ngIf="showNotDeletedTasks(currentTasksPage, task)"  [ngClass]="{'deleted-page': !notInDeletedPage(currentTasksPage)}">
               <div class="tasks-list__item__name">
                 <mat-checkbox *ngIf="notInDeletedPage(currentTasksPage)" [formControl]="complete" (click)="onComplete(task.name)"></mat-checkbox>
                 <div class="name" highlight [search]="filterChanges | async"

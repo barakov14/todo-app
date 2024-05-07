@@ -4,7 +4,7 @@ import {
   Input, Output,
 } from '@angular/core';
 import {CdkDrag, CdkDragDrop, CdkDragHandle, CdkDropList, moveItemInArray} from "@angular/cdk/drag-drop";
-import {AsyncPipe, DatePipe, NgClass, NgFor, NgIf} from "@angular/common";
+import {AsyncPipe, DatePipe, NgClass, NgFor, NgIf, SlicePipe} from "@angular/common";
 import {SearchInputComponent} from "../../../shared/ui/search-input/search-input.component";
 import {CompleteTask, Task, TaskStatus, TaskStatusEnum} from "../../../core/api-types/task";
 import {MatCheckbox} from "@angular/material/checkbox";
@@ -16,6 +16,7 @@ import {BehaviorSubject, Observable} from "rxjs";
 import {HighlightDirective} from "../../../core/directives/highlight.directive";
 import {PersistenceService} from "../../../core/utils/persistence.service";
 import {FormControl, ReactiveFormsModule} from "@angular/forms";
+import {TasksService} from "../../data-access/tasks.service";
 
 @Component({
   selector: 'tasks-list',
@@ -36,7 +37,8 @@ import {FormControl, ReactiveFormsModule} from "@angular/forms";
     NgIf,
     AsyncPipe,
     HighlightDirective,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    SlicePipe
   ],
   templateUrl: './tasks-list.component.html',
   styleUrl: './tasks-list.component.scss',
@@ -50,17 +52,24 @@ export class TasksListComponent {
   @Output() completeTasks = new EventEmitter<CompleteTask>()
   @Output() returnTask = new EventEmitter<string>()
 
+  currentPage = 0;
+  itemsPerPage = 5;
+
   private readonly persistenceService = inject(PersistenceService)
+  private readonly tasksService = inject(TasksService)
+
 
   public filterChanges = new BehaviorSubject<string>('')
-
-  private currentTasksPageCopy = ''
 
   complete = new FormControl()
 
 
   drop(event: CdkDragDrop<string[]>) {
     moveItemInArray(this.tasksList as Task[], event.previousIndex, event.currentIndex);
+    const tasksList = this.tasksService.tasksList.value
+    if(tasksList === this.tasksList) {
+      this.persistenceService.saveTasksList(this.tasksList!)
+    }
   }
 
   areAnyTagsSelected(): Task[] {
@@ -73,10 +82,8 @@ export class TasksListComponent {
   }
 
   onSearch(filter: string) {
-    this.filter.emit(filter);
     this.filterChanges.next(filter);
-
-    this.currentTasksPageCopy = this.currentTasksPage as string;
+    this.filter.emit(filter);
 
     if (filter) {
       this.currentTasksPage = 'Результаты поиска';
@@ -87,8 +94,10 @@ export class TasksListComponent {
     return task && task.status && task.status.some((v) => v.value === TaskStatusEnum.importantTasks);
   }
 
-  taskIncluded(task: Task, currentTaskPage: string): boolean {
-    return task && task.status && task.status.some((v) => v.value === currentTaskPage)
+  taskIncluded(currentTaskPage: string, task: Task): boolean {
+    return task! && task.status && task.status.some((v) => {
+      return v.value === currentTaskPage || true
+    })
   }
 
   onComplete(taskName: string) {
@@ -104,8 +113,8 @@ export class TasksListComponent {
   }
 
   showNotDeletedTasks(currentTasksPage: string, task: Task): boolean {
-    if (currentTasksPage === 'Удаленные') {
-      return task && task.status && task.status.some((status) => status.value === TaskStatusEnum.deletedTasks);
+    if (currentTasksPage === TaskStatusEnum.deletedTasks) {
+      return task! && task.status && task.status.some((status) => status.value === TaskStatusEnum.deletedTasks);
     } else {
       return !task || !task.status || !task.status.some((status) => status.value === TaskStatusEnum.deletedTasks);
     }

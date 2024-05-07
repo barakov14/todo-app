@@ -1,12 +1,13 @@
 import {ChangeDetectionStrategy, Component, inject} from '@angular/core';
 import {ButtonFilledComponent} from "../../../shared/ui/button-filled/button-filled.component";
 import {TagComponent} from "../../../shared/ui/tag/tag.component";
-import {NgClass, NgForOf} from "@angular/common";
+import {AsyncPipe, NgClass, NgForOf} from "@angular/common";
 import {tags} from "../../mock/tags.mock";
 import {
   TasksCreateButtonComponent
 } from "../../../tasks/feature-tasks-create/tasks-create-button/tasks-create-button.component";
 import {Router, RouterLink, RouterLinkActive} from "@angular/router";
+import {TasksService} from "../../../tasks/data-access/tasks.service";
 
 @Component({
   selector: 'sidenav',
@@ -18,7 +19,8 @@ import {Router, RouterLink, RouterLinkActive} from "@angular/router";
     TasksCreateButtonComponent,
     RouterLink,
     NgClass,
-    RouterLinkActive
+    RouterLinkActive,
+    AsyncPipe
   ],
   templateUrl: './sidenav.component.html',
   styleUrl: './sidenav.component.scss',
@@ -28,7 +30,9 @@ export class SidenavComponent {
 
   selectedTags: string[] = [];
 
-  public isTriggered: boolean = false
+  private readonly tasksService = inject(TasksService)
+
+  public isTriggered = this.tasksService.sidenavTriggerByFilter
 
   private readonly router = inject(Router)
 

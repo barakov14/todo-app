@@ -1,19 +1,19 @@
 <div class="container">
   <tasks-create-button></tasks-create-button>
   <ul class="menu">
-    <li class="menu__item" [routerLink]="['/мои задачи']" routerLinkActive="active-link">
+    <li class="menu__item" [routerLink]="['/мои задачи']" routerLinkActive="active-link" [ngClass]="{'active-link-clear': isTriggered | async}">
       <i class="ri-mail-line"></i>
       <p>Мои задачи</p>
     </li>
-    <li class="menu__item" [routerLink]="['/важные задачи']" routerLinkActive="active-link">
+    <li class="menu__item" [routerLink]="['/важные задачи']" routerLinkActive="active-link" [ngClass]="{'active-link-clear': isTriggered | async}">
       <i class="ri-star-line"></i>
       <p>Важные</p>
     </li>
-    <li class="menu__item" [routerLink]="['/выполненные']" routerLinkActive="active-link">
+    <li class="menu__item" [routerLink]="['/выполненные']" routerLinkActive="active-link" [ngClass]="{'active-link-clear': isTriggered | async}">
       <i class="ri-check-line"></i>
       <p>Выполненные</p>
     </li>
-    <li class="menu__item" [routerLink]="['/удаленные']" routerLinkActive="active-link">
+    <li class="menu__item" [routerLink]="['/удаленные']" routerLinkActive="active-link" [ngClass]="{'active-link-clear': isTriggered | async}">
       <i class="ri-delete-bin-7-line"></i>
       <p>Удаленные</p>
     </li>
@@ -21,7 +21,7 @@
   <div class="tags">
     <p class="tags__title">Тэги</p>
     <ul *ngFor="let item of tags">
-      <li class="tags__item" [ngClass]="{'selected': isSelected(item.tag)}">
+      <li class="tags__item" [ngClass]="{'selected': !(isTriggered | async) && isSelected(item.tag)}">
         <ui-tag [tag]="item.tag" (click)="onToggleTag(item.tag)"></ui-tag>
       </li>
     </ul>

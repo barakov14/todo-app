@@ -89,3 +89,12 @@ ul {
   height: 100%; /* Высота равна высоте текста */
   background-color: #9B51E0; /* Цвет подчеркивания */
 }
+
+.active-link-clear {
+  color: #fff;
+  opacity: 0.8;
+}
+
+.active-link-clear::after {
+  display: none;
+}

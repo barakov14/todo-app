@@ -5,9 +5,8 @@ import {takeUntilDestroyed} from "@angular/core/rxjs-interop";
 import {StringService} from "../../../core/utils/string.service";
 import {TasksService} from "../../data-access/tasks.service";
 import {AsyncPipe} from "@angular/common";
-import {CdkDragDrop, moveItemInArray} from "@angular/cdk/drag-drop";
-import {CompleteTask, Task} from "../../../core/api-types/task";
-import {BehaviorSubject, Observable} from "rxjs";
+import {CompleteTask} from "../../../core/api-types/task";
+import {BehaviorSubject} from "rxjs";
 
 @Component({
   selector: 'tasks-list-container',

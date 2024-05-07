@@ -10,6 +10,7 @@ export class TasksService {
   public currentTasksPage = new BehaviorSubject<null | string>(null)
   public tasksList = new BehaviorSubject<null | Task[]>(null)
   public filteredTasksList = new BehaviorSubject<null | Task[]>(null)
+  public sidenavTriggerByFilter = new BehaviorSubject<boolean>(false)
 
 
   getTasksList() {
@@ -36,6 +37,7 @@ export class TasksService {
     const tasksList = this.tasksList.value
     const updatedTasksList = tasksList?.filter((v) => v.name.includes(filter))
     this.filteredTasksList.next(updatedTasksList as Task[])
+    this.sidenavTriggerByFilter.next(!!filter)
   }
 
   deleteTask(taskName: string) {
@@ -75,9 +77,11 @@ export class TasksService {
   returnTask(taskName: string) {
     const tasksList = this.tasksList.value?.map(
       (task) => {
-        task.status = task.status.filter(
-          (status) => status.value !== TaskStatusEnum.deletedTasks
-        )
+        if (task.name === taskName) {
+          task.status = task.status.filter(
+            (status) => status.value !== TaskStatusEnum.deletedTasks
+          )
+        }
         return task
       }
     )
