@@ -21,7 +21,7 @@
   <div class="tags">
     <p class="tags__title">Тэги</p>
     <ul *ngFor="let item of tags">
-      <li class="tags__item" [ngClass]="{'selected': !(isTriggered | async) && isSelected(item.tag)}">
+      <li class="tags__item" [ngClass]="{'selected': !(isTriggered | async) && (isSelected(item.tag) | async)}">
         <ui-tag [tag]="item.tag" (click)="onToggleTag(item.tag)"></ui-tag>
       </li>
     </ul>

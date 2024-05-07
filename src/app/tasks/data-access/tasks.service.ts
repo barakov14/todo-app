@@ -2,15 +2,33 @@ import {inject, Injectable} from "@angular/core";
 import {BehaviorSubject} from "rxjs";
 import {CompleteTask, CreateTask, Task, TaskStatusEnum} from "../../core/api-types/task";
 import {PersistenceService} from "../../core/utils/persistence.service";
+import {Router} from "@angular/router";
 
 @Injectable({providedIn: 'root'})
 
 export class TasksService {
   private readonly persistenceService = inject(PersistenceService)
+  private readonly router = inject(Router)
+
   public currentTasksPage = new BehaviorSubject<null | string>(null)
   public tasksList = new BehaviorSubject<null | Task[]>(null)
   public filteredTasksList = new BehaviorSubject<null | Task[]>(null)
   public sidenavTriggerByFilter = new BehaviorSubject<boolean>(false)
+
+  public selectedTags = new BehaviorSubject<string[]>([])
+
+
+  onToggleTag(tag: string) {
+    let selectedTags = this.selectedTags.value;
+    if (selectedTags.includes(tag)) {
+      selectedTags = selectedTags.filter((v) => v !== tag);
+    } else {
+      selectedTags.push(tag);
+    }
+    this.router.navigate([], { queryParams: { tag: selectedTags }, queryParamsHandling: 'merge' });
+    this.selectedTags.next(selectedTags);
+  }
+
 
 
   getTasksList() {
@@ -38,6 +56,13 @@ export class TasksService {
     const updatedTasksList = tasksList?.filter((v) => v.name.includes(filter))
     this.filteredTasksList.next(updatedTasksList as Task[])
     this.sidenavTriggerByFilter.next(!!filter)
+  }
+
+  loadMoreTasks(startIndex: number, endIndex: number) {
+    const additionalTasks: Task[] = this.tasksList.value?.slice(startIndex, endIndex)!
+    const currentTasksList = this.tasksList.value || [];
+    const updatedTasksList = currentTasksList.concat(additionalTasks);
+    return updatedTasksList
   }
 
   deleteTask(taskName: string) {

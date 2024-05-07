@@ -52,8 +52,8 @@ export class TasksListComponent {
   @Output() completeTasks = new EventEmitter<CompleteTask>()
   @Output() returnTask = new EventEmitter<string>()
 
-  currentPage = 0;
-  itemsPerPage = 5;
+  public currentPage = 0;
+  public itemsPerPage = 5;
 
   private readonly persistenceService = inject(PersistenceService)
   private readonly tasksService = inject(TasksService)
@@ -74,8 +74,8 @@ export class TasksListComponent {
 
   areAnyTagsSelected(): Task[] {
     if (this.selectedTags!.length > 0) {
-      return this.tasksList!.filter((task) => {
-        return task.tags.some((tag) => this.selectedTags?.includes(tag));
+      return this.loadMoreTasks().filter((task) => {
+        return task && task.tags && task.tags.some((tag) => this.selectedTags?.includes(tag));
       });
     }
     return this.tasksList!;
@@ -92,6 +92,10 @@ export class TasksListComponent {
 
   isImportant(task: Task): boolean {
     return task && task.status && task.status.some((v) => v.value === TaskStatusEnum.importantTasks);
+  }
+
+  onToggleTag(tag: string) {
+    this.tasksService.onToggleTag(tag)
   }
 
   taskIncluded(currentTaskPage: string, task: Task): boolean {
@@ -126,6 +130,19 @@ export class TasksListComponent {
 
   notInDeletedPage(currentTaskPage: string): boolean {
     return currentTaskPage !== TaskStatusEnum.deletedTasks;
+  }
+
+  loadMoreTasks() {
+    this.currentPage++;
+
+    const startIndex = this.currentPage * this.itemsPerPage;
+    const endIndex = startIndex + this.itemsPerPage;
+
+    return this.tasksService.loadMoreTasks(startIndex, endIndex);
+  }
+
+  get isLast(): boolean {
+    return this.loadMoreTasks()?.length === this.tasksService.tasksList.value?.length
   }
 
 

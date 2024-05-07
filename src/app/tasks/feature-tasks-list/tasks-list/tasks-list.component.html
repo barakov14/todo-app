@@ -16,7 +16,7 @@
               </div>
               <div class="tasks-list__item__badge">
                 <div *ngFor="let tag of task.tags">
-                  <ui-badge [badge]="tag"></ui-badge>
+                  <ui-badge [badge]="tag" (click)="onToggleTag(tag)"></ui-badge>
                 </div>
               </div>
               <div class="tasks-list__item__footer">
@@ -38,6 +38,9 @@
           </ng-container>
         </div>
       </div>
+    </div>
+    <div class="pagination" *ngIf="tasksList!.length > itemsPerPage && !isLast">
+      <button class="pagination__btn" (click)="loadMoreTasks()">открыть еще 5 задач</button>
     </div>
   </div>
 </div>

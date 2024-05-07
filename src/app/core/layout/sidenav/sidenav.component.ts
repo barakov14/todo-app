@@ -1,4 +1,4 @@
-import {ChangeDetectionStrategy, Component, inject} from '@angular/core';
+import {ChangeDetectionStrategy, Component, DestroyRef, inject} from '@angular/core';
 import {ButtonFilledComponent} from "../../../shared/ui/button-filled/button-filled.component";
 import {TagComponent} from "../../../shared/ui/tag/tag.component";
 import {AsyncPipe, NgClass, NgForOf} from "@angular/common";
@@ -8,6 +8,8 @@ import {
 } from "../../../tasks/feature-tasks-create/tasks-create-button/tasks-create-button.component";
 import {Router, RouterLink, RouterLinkActive} from "@angular/router";
 import {TasksService} from "../../../tasks/data-access/tasks.service";
+import {takeUntilDestroyed} from "@angular/core/rxjs-interop";
+import {map, Observable, tap} from "rxjs";
 
 @Component({
   selector: 'sidenav',
@@ -28,29 +30,21 @@ import {TasksService} from "../../../tasks/data-access/tasks.service";
 })
 export class SidenavComponent {
 
-  selectedTags: string[] = [];
-
   private readonly tasksService = inject(TasksService)
-
   public isTriggered = this.tasksService.sidenavTriggerByFilter
-
-  private readonly router = inject(Router)
+  private readonly destroyRef = inject(DestroyRef)
 
   onToggleTag(tag: string) {
-    if(this.selectedTags.includes(tag)) {
-      this.selectedTags = this.selectedTags.filter((v) => v !== tag)
-    } else {
-      this.selectedTags.push(tag)
-    }
-    this.updateQueryParams()
+    this.tasksService.onToggleTag(tag)
   }
 
-  isSelected(tag: string): boolean {
-    return this.selectedTags.includes(tag);
-  }
-
-  updateQueryParams(): void {
-    this.router.navigate([], { queryParams: { tag: this.selectedTags }, queryParamsHandling: 'merge' });
+  isSelected(tag: string): Observable<boolean> {
+    return this.tasksService.selectedTags.pipe(
+      takeUntilDestroyed(this.destroyRef),
+      map((res) => {
+        return res.includes(tag)
+      })
+    )
   }
 
   protected readonly tags = tags;
