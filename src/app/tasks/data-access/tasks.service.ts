@@ -83,23 +83,27 @@ export class TasksService {
   }
 
   completeTask(complete: CompleteTask) {
-    const tasksList: Task[] = this.tasksList.value?.map(
-      (task) => {
-        if (task.name === complete.taskName) {
-          if (!complete.completed) {
-            task.status.push({value: TaskStatusEnum.myTasks});
-            task.status = task.status.filter(v => v.value !== TaskStatusEnum.completedTasks);
-          } else {
-            task.status.push({value: TaskStatusEnum.completedTasks});
-            task.status = task.status.filter(v => v.value !== TaskStatusEnum.myTasks);
-          }
+    const updatedTasksList = this.tasksList.value!.map(task => {
+      if (task.name === complete.taskName) {
+        if (!complete.completed) {
+          // Добавляем задачу в список "Мои задачи" и удаляем из "Выполненных"
+          task.status = task.status.filter(v => v.value !== TaskStatusEnum.completedTasks);
+          task.status.push({ value: TaskStatusEnum.myTasks });
+        } else {
+          // Добавляем задачу в список "Выполненные" и удаляем из "Мои задачи"
+          task.status = task.status.filter(v => v.value !== TaskStatusEnum.myTasks);
+          task.status.push({ value: TaskStatusEnum.completedTasks });
         }
-        return task
       }
-    ) || []
-    this.tasksList.next(tasksList as Task[])
-    this.filteredTasksList.next(tasksList as Task[])
-    this.persistenceService.saveTasksList(this.tasksList.value as Task[])
+      return task;
+    });
+
+    // Обновляем значения в BehaviorSubject
+    this.tasksList.next(updatedTasksList);
+    this.filteredTasksList.next(updatedTasksList);
+
+    // Сохраняем обновленный список задач
+    this.persistenceService.saveTasksList(updatedTasksList);
   }
 
 

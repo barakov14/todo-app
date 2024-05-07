@@ -12,7 +12,7 @@ import {TagComponent} from "../../../shared/ui/tag/tag.component";
 import {BadgeComponent} from "../../../shared/ui/badge/badge.component";
 import {TasksDeleteButtonComponent} from "../../feature-tasks-delete/tasks-delete-button/tasks-delete-button.component";
 import {MatDivider} from "@angular/material/divider";
-import {BehaviorSubject, map, Observable} from "rxjs";
+import {BehaviorSubject, map, Observable, of} from "rxjs";
 import {HighlightDirective} from "../../../core/directives/highlight.directive";
 import {PersistenceService} from "../../../core/utils/persistence.service";
 import {FormControl, ReactiveFormsModule} from "@angular/forms";
@@ -69,6 +69,16 @@ export class TasksListComponent {
   public userSearching!: string
 
 
+
+  isCompleted(taskName: string): Observable<boolean> {
+    const task = this.tasksList?.find(task => task.name === taskName);
+    if (!task) {
+      return of(false);
+    }
+    return of(task.status.some(v => v.value === TaskStatusEnum.completedTasks));
+  }
+
+
   drop(event: CdkDragDrop<string[]>) {
     moveItemInArray(this.tasksList as Task[], event.previousIndex, event.currentIndex);
     const tasksList = this.tasksService.tasksList.value
@@ -112,7 +122,6 @@ export class TasksListComponent {
         if (filter) {
           return true; // Если фильтр не пустой, вернуть true
         } else {
-          this.currentTasksPage = TaskStatusEnum.myTasks
           return task.status.some((v) => v.value === currentTaskPage); // Иначе вернуть результат сравнения
         }
       })
