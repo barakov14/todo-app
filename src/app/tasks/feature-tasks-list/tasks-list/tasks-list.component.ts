@@ -56,6 +56,8 @@ export class TasksListComponent {
   public currentPage = 0;
   public itemsPerPage = 5;
 
+  private currentTasksPageCopy!: string
+
   private readonly persistenceService = inject(PersistenceService)
   private readonly tasksService = inject(TasksService)
   private readonly destroyRef = inject(DestroyRef)
@@ -88,6 +90,7 @@ export class TasksListComponent {
     this.filter.emit(filter);
 
     if (filter) {
+      this.currentTasksPageCopy = this.currentTasksPage!
       this.currentTasksPage = 'Результаты поиска';
     }
   }
@@ -105,6 +108,7 @@ export class TasksListComponent {
       takeUntilDestroyed(this.destroyRef),
       map((filter) => {
         if (filter !== '') {
+          this.currentTasksPage = this.currentTasksPageCopy
           return true; // Если фильтр не пустой, вернуть true
         } else {
           return task.status.some((v) => v.value === currentTaskPage); // Иначе вернуть результат сравнения
