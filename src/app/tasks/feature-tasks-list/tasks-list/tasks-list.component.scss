@@ -4,6 +4,10 @@
   justify-content: space-between;
 }
 
+.deleted-page {
+  padding: 0.5rem;
+}
+
 .tasks-list__item__date {
   font-size: 12px;
   color: #676D7D;
@@ -17,6 +21,16 @@
   font-size: 20px;
   cursor: move;
   opacity: 0.7;
+}
+
+.ri-restart-line {
+  font-size: 20px;
+  cursor: pointer;
+
+}
+.ri-restart-line:hover {
+  opacity: 0.7;
+  transition: ease-in 0.2s;
 }
 
 .tasks-list__item__badge {

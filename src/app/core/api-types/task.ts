@@ -1,25 +1,32 @@
 export interface CreateTask {
   name: string;
   date: Date;
-  isImportant: boolean;
   description: string;
   tags: string[];
-  isCompleted: boolean;
-  isDeleted: boolean
+  status: TaskStatus[]
 }
 
 
 export interface Task {
   name: string;
   date: Date;
-  isImportant: boolean;
   description: string;
   tags: string[];
-  isCompleted: boolean;
-  isDeleted: boolean;
+  status: TaskStatus[]
 }
 
-export interface Tasks {
-  tasksList: Task[]
-  taskType: string
+export enum TaskStatusEnum {
+  myTasks = "Мои задачи",
+  importantTasks = "Важные задачи",
+  deletedTasks = "Удаленные",
+  completedTasks = "Выполненные"
+}
+
+export type TaskStatus = {
+  value: "Мои задачи" | "Важные задачи" | "Удаленные" | "Выполненные"
+}
+
+export interface CompleteTask {
+  completed: boolean;
+  taskName: string
 }

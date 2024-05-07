@@ -6,7 +6,7 @@ import {StringService} from "../../../core/utils/string.service";
 import {TasksService} from "../../data-access/tasks.service";
 import {AsyncPipe} from "@angular/common";
 import {CdkDragDrop, moveItemInArray} from "@angular/cdk/drag-drop";
-import {Task} from "../../../core/api-types/task";
+import {CompleteTask, Task} from "../../../core/api-types/task";
 import {BehaviorSubject, Observable} from "rxjs";
 
 @Component({
@@ -53,6 +53,13 @@ export class TasksListContainerComponent implements OnInit {
 
   filter(filter: string) {
     this.tasksService.filterTasks(filter)
+  }
+  onComplete(complete: CompleteTask) {
+    this.tasksService.completeTask(complete)
+  }
+
+  onReturnTask(taskName: string) {
+    this.tasksService.returnTask(taskName)
   }
 
   protected readonly event = event;

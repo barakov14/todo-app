@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import {SidenavComponent} from "../shared/layout/sidenav/sidenav.component";
+import {SidenavComponent} from "../core/layout/sidenav/sidenav.component";
 import {RouterOutlet} from "@angular/router";
 
 @Component({

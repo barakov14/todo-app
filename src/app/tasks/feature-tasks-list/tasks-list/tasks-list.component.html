@@ -5,12 +5,13 @@
     <div class="tasks-list">
       <div cdkDropList class="tasks-list" (cdkDropListDropped)="drop($event)">
         <div class="" *ngFor="let task of areAnyTagsSelected()" cdkDrag>
-          <ng-container *ngIf="task">
-            <div class="tasks-list__item">
+          <ng-container *ngIf="task && currentTasksPage && taskIncluded(task, currentTasksPage)">
+            <div class="tasks-list__item" *ngIf="showNotDeletedTasks(currentTasksPage, task)" [ngClass]="{'deleted-page': !notInDeletedPage(currentTasksPage)}">
               <div class="tasks-list__item__name">
-                <mat-checkbox>
-                </mat-checkbox>
-                <div class="name" highlight [search]="filterChanges | async" [ngClass]="{'important': task.isImportant}" [innerHtml]="task.name">
+                <mat-checkbox *ngIf="notInDeletedPage(currentTasksPage)" [formControl]="complete" (click)="onComplete(task.name)"></mat-checkbox>
+                <div class="name" highlight [search]="filterChanges | async"
+                     [ngClass]="{'important': isImportant(task) && notInImportantPage(currentTasksPage)}"
+                     [innerHtml]="task?.name">
                 </div>
               </div>
               <div class="tasks-list__item__badge">
@@ -23,8 +24,13 @@
                   {{ task.date | date: 'HH:mm / dd.MM.yyyy' }}
                 </div>
                 <div class="tasks-list__item__footer__actions">
-                  <tasks-delete-button [taskName]="task.name"></tasks-delete-button>
-                  <i class="ri-draggable" cdkDragHandle></i>
+                  <ng-container *ngIf="notInDeletedPage(currentTasksPage); else inDeletedPage">
+                    <tasks-delete-button [taskName]="task.name"></tasks-delete-button>
+                    <i class="ri-draggable" cdkDragHandle></i>
+                  </ng-container>
+                  <ng-template #inDeletedPage>
+                    <i class="ri-restart-line" (click)="onReturnTask(task.name)"></i>
+                  </ng-template>
                 </div>
               </div>
             </div>

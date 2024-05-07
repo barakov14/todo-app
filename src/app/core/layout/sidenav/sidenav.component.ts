@@ -1,8 +1,8 @@
 import {ChangeDetectionStrategy, Component, inject} from '@angular/core';
-import {ButtonFilledComponent} from "../../ui/button-filled/button-filled.component";
-import {TagComponent} from "../../ui/tag/tag.component";
+import {ButtonFilledComponent} from "../../../shared/ui/button-filled/button-filled.component";
+import {TagComponent} from "../../../shared/ui/tag/tag.component";
 import {NgClass, NgForOf} from "@angular/common";
-import {tags} from "../../../core/mock/tags.mock";
+import {tags} from "../../mock/tags.mock";
 import {
   TasksCreateButtonComponent
 } from "../../../tasks/feature-tasks-create/tasks-create-button/tasks-create-button.component";
@@ -27,6 +27,8 @@ import {Router, RouterLink, RouterLinkActive} from "@angular/router";
 export class SidenavComponent {
 
   selectedTags: string[] = [];
+
+  public isTriggered: boolean = false
 
   private readonly router = inject(Router)
 

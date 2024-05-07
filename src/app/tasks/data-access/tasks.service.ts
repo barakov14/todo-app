@@ -1,6 +1,6 @@
 import {inject, Injectable} from "@angular/core";
 import {BehaviorSubject} from "rxjs";
-import {CreateTask, Task} from "../../core/api-types/task";
+import {CompleteTask, CreateTask, Task, TaskStatusEnum} from "../../core/api-types/task";
 import {PersistenceService} from "../../core/utils/persistence.service";
 
 @Injectable({providedIn: 'root'})
@@ -29,7 +29,7 @@ export class TasksService {
     this.filteredTasksList.next(updatedFilteredTasksList)
 
 
-    this.persistenceService.saveTask(data)
+    this.persistenceService.saveCreatedTask(data)
   }
 
   filterTasks(filter: string) {
@@ -39,10 +39,50 @@ export class TasksService {
   }
 
   deleteTask(taskName: string) {
-    const tasksList = this.tasksList.value?.filter(
-      (v) => !v.name.includes(taskName)
+    const tasksList: Task[] = this.tasksList.value?.map(
+      (task) => {
+        if (task.name === taskName) {
+          task.status.push({value: TaskStatusEnum.deletedTasks});
+        }
+        return task
+      }
+    ) || []
+    this.tasksList.next(tasksList as Task[])
+    this.filteredTasksList.next(tasksList as Task[])
+    this.persistenceService.saveTasksList(this.tasksList.value as Task[])
+  }
+
+  completeTask(complete: CompleteTask) {
+    const tasksList: Task[] = this.tasksList.value?.map(
+      (task) => {
+        if (task.name === complete.taskName) {
+          if (!complete.completed) {
+            task.status.push({value: TaskStatusEnum.myTasks});
+            task.status = task.status.filter(v => v.value !== TaskStatusEnum.completedTasks);
+          } else {
+            task.status.push({value: TaskStatusEnum.completedTasks});
+            task.status = task.status.filter(v => v.value !== TaskStatusEnum.myTasks);
+          }
+        }
+        return task
+      }
+    ) || []
+    this.tasksList.next(tasksList as Task[])
+    this.filteredTasksList.next(tasksList as Task[])
+    this.persistenceService.saveTasksList(this.tasksList.value as Task[])
+  }
+
+  returnTask(taskName: string) {
+    const tasksList = this.tasksList.value?.map(
+      (task) => {
+        task.status = task.status.filter(
+          (status) => status.value !== TaskStatusEnum.deletedTasks
+        )
+        return task
+      }
     )
     this.tasksList.next(tasksList as Task[])
     this.filteredTasksList.next(tasksList as Task[])
+    this.persistenceService.saveTasksList(this.tasksList.value as Task[])
   }
 }

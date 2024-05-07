@@ -8,7 +8,7 @@ import {FormBuilder, FormControl, ReactiveFormsModule, Validators} from "@angula
 import {AsyncPipe, NgForOf, NgIf} from "@angular/common";
 import {MatCheckbox} from "@angular/material/checkbox";
 import {tags} from "../../../core/mock/tags.mock";
-import {CreateTask} from "../../../core/api-types/task";
+import {CreateTask, TaskStatus, TaskStatusEnum} from "../../../core/api-types/task";
 import {TextareaDirective} from "../../../shared/ui/input/textarea.directive";
 import {BehaviorSubject} from "rxjs";
 import {DateValidator} from "../../../core/validators/date.validator";
@@ -54,14 +54,20 @@ export class TasksCreateDialogComponent {
 
   onCreateTask() {
     if(this.formGroup.valid) {
+
+      const status: TaskStatus[] = []
+      status.push({ value: TaskStatusEnum.myTasks });
+
+      if (this.formGroup.value.isImportant) {
+        status.push({ value: TaskStatusEnum.importantTasks });
+      }
+
       const data: CreateTask = {
         name: this.formGroup.value.name as string,
         description: this.formGroup.value.description as string,
-        isImportant: this.formGroup.value.isImportant as boolean,
+        status: status as TaskStatus[],
         tags: this.formGroup.value.tags,
         date: this.formGroup.value.date as Date,
-        isCompleted: false,
-        isDeleted: false
       }
       this.validatorsError.next(false)
       this.dialogRef.close(data)

@@ -4,10 +4,14 @@ import {CreateTask, Task} from "../api-types/task";
 @Injectable({providedIn: 'root'})
 
 export class PersistenceService {
-  saveTask(data: CreateTask): void {
+  saveCreatedTask(data: CreateTask): void {
     const tasksList: Task[] = JSON.parse(localStorage.getItem('tasks') || '[]');
     tasksList.push(data)
     localStorage.setItem('tasks', JSON.stringify(tasksList))
+  }
+
+  saveTasksList(data: Task[]): void {
+    localStorage.setItem('tasks', JSON.stringify(data))
   }
 
   getTasks(): Task[] {

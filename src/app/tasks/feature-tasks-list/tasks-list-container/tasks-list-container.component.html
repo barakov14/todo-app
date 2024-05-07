@@ -3,4 +3,6 @@
   [tasksList]="tasksList | async"
   [selectedTags]="selectedTags | async"
   (filter)="filter($event)"
+  (completeTasks)="onComplete($event)"
+  (returnTask)="onReturnTask($event)"
 ></tasks-list>
