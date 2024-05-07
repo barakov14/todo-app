@@ -1,9 +1,7 @@
 import {ChangeDetectionStrategy, Component, DestroyRef, inject, Input} from '@angular/core';
 import {MatDialog, MatDialogRef} from "@angular/material/dialog";
 import {TasksService} from "../../data-access/tasks.service";
-import {TasksCreateDialogComponent} from "../../feature-tasks-create/tasks-create-dialog/tasks-create-dialog.component";
 import {takeUntilDestroyed} from "@angular/core/rxjs-interop";
-import {CreateTask, Task} from "../../../core/api-types/task";
 import {TasksDeleteDialogComponent} from "../tasks-delete-dialog/tasks-delete-dialog.component";
 
 @Component({

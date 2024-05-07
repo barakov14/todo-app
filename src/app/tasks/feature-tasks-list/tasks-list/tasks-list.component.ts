@@ -6,13 +6,13 @@ import {
 import {CdkDrag, CdkDragDrop, CdkDragHandle, CdkDropList, moveItemInArray} from "@angular/cdk/drag-drop";
 import {AsyncPipe, DatePipe, NgClass, NgFor, NgIf, SlicePipe} from "@angular/common";
 import {SearchInputComponent} from "../../../shared/ui/search-input/search-input.component";
-import {CompleteTask, Task, TaskStatus, TaskStatusEnum} from "../../../core/api-types/task";
+import {CompleteTask, Task, TaskStatusEnum} from "../../../core/api-types/task";
 import {MatCheckbox} from "@angular/material/checkbox";
 import {TagComponent} from "../../../shared/ui/tag/tag.component";
 import {BadgeComponent} from "../../../shared/ui/badge/badge.component";
 import {TasksDeleteButtonComponent} from "../../feature-tasks-delete/tasks-delete-button/tasks-delete-button.component";
 import {MatDivider} from "@angular/material/divider";
-import {BehaviorSubject, Observable} from "rxjs";
+import {BehaviorSubject} from "rxjs";
 import {HighlightDirective} from "../../../core/directives/highlight.directive";
 import {PersistenceService} from "../../../core/utils/persistence.service";
 import {FormControl, ReactiveFormsModule} from "@angular/forms";

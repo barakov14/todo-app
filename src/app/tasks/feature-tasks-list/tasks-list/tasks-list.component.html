@@ -1,14 +1,29 @@
 <div class="container">
   <div class="tasks">
+<!--    Реализация поисковика-->
     <ui-search-input (onSearch)="onSearch($event)"></ui-search-input>
+    <!--  Тут мы указываем значение params от роуты  -->
     <h2>{{ currentTasksPage }}</h2>
     <div class="tasks-list">
+      <!--  Реализуем drag drop через cdkDropList    -->
       <div cdkDropList class="tasks-list" (cdkDropListDropped)="drop($event)">
-        <div class="" *ngFor="let task of areAnyTagsSelected() | slice:0:(currentPage + 1) * itemsPerPage" cdkDrag>
+      <!--    фильтруем по тому, выбран ли тэги, если нет то возвращаем весь task list    -->
+      <!--    также через slice pipe реализуем пагинацию    -->
+        <div *ngFor="let task of areAnyTagsSelected() | slice:0:(currentPage + 1) * itemsPerPage" cdkDrag>
+        <!--     фильтруем в функции taskIncluded по currenTasksPage(Важные задачи, Мои задачи, Удаленные, Выполненные)     -->
           <ng-container *ngIf="task && currentTasksPage && taskIncluded(currentTasksPage, task)">
+
+          <!--     Через функцию showNotDeletedTasks фильтруем чтобы удаленные задачи
+                могли быть только в странице удаленных задач, не удаленные в других
+
+              -->
             <div class="tasks-list__item" *ngIf="showNotDeletedTasks(currentTasksPage, task)"  [ngClass]="{'deleted-page': !notInDeletedPage(currentTasksPage)}">
               <div class="tasks-list__item__name">
+            <!--     Убираем чекбокс, если находимя в странице удаленных задач           -->
                 <mat-checkbox *ngIf="notInDeletedPage(currentTasksPage)" [formControl]="complete" (click)="onComplete(task.name)"></mat-checkbox>
+            <!--       Убираем желтый цвет важной задачи в странице важных задач через ngClass
+             Также через highlight накладываем стили на выделенный текст при поиске задач
+             -->
                 <div class="name" highlight [search]="filterChanges | async"
                      [ngClass]="{'important': isImportant(task) && notInImportantPage(currentTasksPage)}"
                      [innerHtml]="task?.name">
