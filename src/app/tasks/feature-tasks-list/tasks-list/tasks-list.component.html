@@ -14,14 +14,16 @@
                      [innerHtml]="task?.name">
                 </div>
               </div>
-              <div class="tasks-list__item__badge">
-                <div *ngFor="let tag of task.tags">
-                  <ui-badge [badge]="tag" (click)="onToggleTag(tag)"></ui-badge>
-                </div>
-              </div>
               <div class="tasks-list__item__footer">
-                <div class="tasks-list__item__footer__date">
-                  {{ task.date | date: 'HH:mm / dd.MM.yyyy' }}
+                <div class="tasks-list__item__footer__info">
+                  <div class="tasks-list__item__badge">
+                    <div *ngFor="let tag of task.tags">
+                      <ui-badge [badge]="tag" (click)="onToggleTag(tag)"></ui-badge>
+                    </div>
+                  </div>
+                  <div class="tasks-list__item__footer__date">
+                    {{ task.date | date: 'HH:mm / dd.MM.yyyy' }}
+                  </div>
                 </div>
                 <div class="tasks-list__item__footer__actions">
                   <ng-container *ngIf="notInDeletedPage(currentTasksPage); else inDeletedPage">

@@ -67,7 +67,7 @@ export class TextareaDirective implements OnInit, DoCheck {
     inputElement.style.borderRadius = '5px';
     inputElement.style.color = '#E0E0E0';
     inputElement.style.padding = '7px 14px';
-    inputElement.style.width = '259px';
+    inputElement.style.width = '100%';
     inputElement.style.background = 'none';
     inputElement.style.outline = 'none';
 

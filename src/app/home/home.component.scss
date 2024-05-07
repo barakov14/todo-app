@@ -2,7 +2,30 @@
   display: flex;
   justify-content: space-between;
 }
+
 .content {
   padding: 0 20px;
   width: 100%;
+}
+
+@media (max-width: 950px) {
+  .wrapper {
+    flex-direction: column;
+  }
+
+  .content {
+    padding: 0;
+    width: 100%;
+  }
+
+  .sidenav {
+    width: 100%;
+    padding: 0;
+  }
+}
+
+@media (max-width: 900px) {
+  .wrapper {
+    padding: 10px;
+  }
 }

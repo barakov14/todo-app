@@ -54,6 +54,9 @@ ui-badge {
   align-items: center;
   justify-content: space-between;
 }
+.tasks-list__item__badge {
+  margin-right: 1rem;
+}
 
 .tasks-list__item__footer {
   display: flex;
@@ -105,6 +108,11 @@ tasks-delete-button {
   cursor: pointer;
 }
 
+.tasks-list__item__footer__info {
+  display: flex;
+  align-items: center;
+}
+
 .pagination__btn {
   border: none;
   outline: none;
@@ -114,4 +122,72 @@ tasks-delete-button {
   font-size: 15px;
   width: 100%;
   height: 100%;
+}
+
+@media only screen and (max-width: 600px) {
+  .container {
+    padding: 10px;
+  }
+
+
+  .tasks-list__item__footer__date {
+    margin-bottom: 5px;
+  }
+
+  .tasks-list__item__footer__actions {
+    margin-top: 5px;
+  }
+
+  .pagination {
+    padding: 5px;
+  }
+
+  .pagination__btn {
+    font-size: 12px;
+  }
+}
+
+@media(max-width: 810px) {
+  .container {
+    font-size: 16px;
+  }
+}
+@media(max-width: 690px) {
+  .tasks-list__item {
+    padding: 20px;
+  }
+  .tasks-list__item__footer {
+    justify-content: space-between;
+    align-items: center;
+  }
+  .tasks-list__item__badge {
+    margin-bottom: 16px;
+  }
+  .tasks-list__item__footer__info {
+    flex-direction: column;
+    align-items: center;
+  }
+}
+
+@media (max-width: 560px) {
+  .tasks-list__item__footer {
+    flex-direction: column-reverse;
+  }
+  .tasks-list__item__footer__actions {
+    align-self: end;
+    margin-bottom: 16px;
+  }
+  .tasks-list__item__badge {
+    flex-direction: column;
+    gap: 10px;
+  }
+  .tasks-list__item__name {
+    flex-direction: column;
+  }
+  mat-checkbox {
+    align-self: flex-start;
+  }
+  .pagination__btn {
+    font-size: 1rem;
+  }
 }

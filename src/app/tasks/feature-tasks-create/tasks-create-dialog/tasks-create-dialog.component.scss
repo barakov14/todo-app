@@ -46,6 +46,9 @@
   color: #FF9F43;
 }
 
+.form-field {
+  width: 100%;
+}
 
 .form-field__checkbox {
   display: flex;
@@ -76,6 +79,9 @@
 .form-field__checkbox__column__element {
   margin-bottom: 10px; /* Add some margin between elements */
 }
+.form-field__input__description {
+  width: 100%;
+}
 
 @keyframes slideInRight {
   from {
@@ -85,3 +91,22 @@
     transform: translateX(0);
   }
 }
+
+@media (max-width: 810px) {
+  .dialog {
+    width: 400px;
+  }
+}
+
+@media (max-width: 768px) {
+  .dialog {
+    width: 600px;
+  }
+}
+
+@media (max-width: 600px) {
+  .dialog {
+    width: 100%;
+  }
+}
+
