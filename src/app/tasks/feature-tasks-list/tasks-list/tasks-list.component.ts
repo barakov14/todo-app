@@ -106,9 +106,9 @@ export class TasksListComponent {
       takeUntilDestroyed(this.destroyRef),
       map((filter) => {
         if (filter) {
-          this.currentTasksPage = TaskStatusEnum.myTasks
           return true; // Если фильтр не пустой, вернуть true
         } else {
+          this.currentTasksPage = TaskStatusEnum.myTasks
           return task.status.some((v) => v.value === currentTaskPage); // Иначе вернуть результат сравнения
         }
       })
