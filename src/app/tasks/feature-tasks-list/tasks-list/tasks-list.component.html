@@ -3,7 +3,10 @@
 <!--    Реализация поисковика-->
     <ui-search-input (onSearch)="onSearch($event)"></ui-search-input>
     <!--  Тут мы указываем значение params от роуты  -->
-    <h2>{{ currentTasksPage }}</h2>
+    <h2 *ngIf="userSearching; else notSearching">{{ userSearching }}</h2>
+    <ng-template #notSearching>
+      <h2>{{ currentTasksPage }}</h2>
+    </ng-template>
     <div class="tasks-list">
       <ng-container *ngIf="tasksList!.length > 0; else noTasks">
       <!--  Реализуем drag drop через cdkDropList    -->

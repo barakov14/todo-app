@@ -66,6 +66,8 @@ export class TasksListComponent {
 
   complete = new FormControl()
 
+  public userSearching!: string
+
 
   drop(event: CdkDragDrop<string[]>) {
     moveItemInArray(this.tasksList as Task[], event.previousIndex, event.currentIndex);
@@ -89,7 +91,9 @@ export class TasksListComponent {
     this.filter.emit(filter);
 
     if (filter) {
-      this.currentTasksPage = 'Результаты поиска';
+      this.userSearching = 'Результаты поиска';
+    } else {
+      this.userSearching = ''
     }
   }
 
