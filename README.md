@@ -18,6 +18,8 @@ data access папка для хранения сервисов и стейт м
 использовал checkbox, datepicker, dialog, drag and drop от Angular Material,
 не смог самостоятельно реализовать, так как не поддаются для стилей
 
+Demo можете посмотреть тут: https://todo-app-34ae4.web.app/
+
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.3.6.
 
 ## Development server
