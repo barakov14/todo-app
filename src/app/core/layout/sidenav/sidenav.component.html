@@ -2,19 +2,19 @@
   <div class="header">
     <tasks-create-button></tasks-create-button>
     <div class="menu">
-      <div class="menu__item" [routerLink]="['/мои задачи']" routerLinkActive="active-link" [ngClass]="{'active-link-clear': isTriggered | async}">
+      <div class="menu__item" [routerLink]="['мои задачи']" routerLinkActive="active-link" [ngClass]="{'active-link-clear': isTriggered | async}">
         <i class="ri-mail-line"></i>
         <p>Мои задачи</p>
       </div>
-      <div class="menu__item" [routerLink]="['/важные задачи']" routerLinkActive="active-link" [ngClass]="{'active-link-clear': isTriggered | async}">
+      <div class="menu__item" [routerLink]="['важные задачи']" routerLinkActive="active-link" [ngClass]="{'active-link-clear': isTriggered | async}">
         <i class="ri-star-line"></i>
         <p>Важные</p>
       </div>
-      <div class="menu__item" [routerLink]="['/выполненные']" routerLinkActive="active-link" [ngClass]="{'active-link-clear': isTriggered | async}">
+      <div class="menu__item" [routerLink]="['выполненные']" routerLinkActive="active-link" [ngClass]="{'active-link-clear': isTriggered | async}">
         <i class="ri-check-line"></i>
         <p>Выполненные</p>
       </div>
-      <div class="menu__item" [routerLink]="['/удаленные']" routerLinkActive="active-link" [ngClass]="{'active-link-clear': isTriggered | async}">
+      <div class="menu__item" [routerLink]="['удаленные']" routerLinkActive="active-link" [ngClass]="{'active-link-clear': isTriggered | async}">
         <i class="ri-delete-bin-7-line"></i>
         <p>Удаленные</p>
       </div>
