@@ -10,6 +10,8 @@ export class TasksService {
   private readonly persistenceService = inject(PersistenceService)
   private readonly router = inject(Router)
 
+  // cтейт менеджмент через бейхейвер сабджекты
+
   public currentTasksPage = new BehaviorSubject<null | string>(null)
   public tasksList = new BehaviorSubject<null | Task[]>(null)
   public filteredTasksList = new BehaviorSubject<null | Task[]>(null)
@@ -55,6 +57,7 @@ export class TasksService {
     const tasksList = this.tasksList.value
     const updatedTasksList = tasksList?.filter((v) => v.name.includes(filter))
     this.filteredTasksList.next(updatedTasksList as Task[])
+    // Проверяем есть ли filter или нет
     this.sidenavTriggerByFilter.next(!!filter)
   }
 
