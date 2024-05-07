@@ -5,6 +5,7 @@
     <!--  Тут мы указываем значение params от роуты  -->
     <h2>{{ currentTasksPage }}</h2>
     <div class="tasks-list">
+      <ng-container *ngIf="tasksList!.length > 0; else noTasks">
       <!--  Реализуем drag drop через cdkDropList    -->
       <div cdkDropList class="tasks-list" (cdkDropListDropped)="drop($event)">
       <!--    фильтруем по тому, выбран ли тэги, если нет то возвращаем весь task list    -->
@@ -55,6 +56,10 @@
           </ng-container>
         </div>
       </div>
+      </ng-container>
+      <ng-template #noTasks>
+        <p style="margin-top: 10px">Задач не найдено.</p>
+      </ng-template>
     </div>
     <div class="pagination" *ngIf="tasksList!.length > itemsPerPage && !isLast">
       <button class="pagination__btn" (click)="loadMoreTasks()">открыть еще 5 задач</button>

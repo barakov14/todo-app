@@ -14,5 +14,5 @@ export const routes: Routes = [
             .then((c) => c.TasksListContainerComponent)
       }
     ]
-  }
+  },
 ];
