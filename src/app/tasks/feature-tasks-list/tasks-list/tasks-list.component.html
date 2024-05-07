@@ -12,7 +12,7 @@
       <!--    также через slice pipe реализуем пагинацию    -->
         <div *ngFor="let task of areAnyTagsSelected() | slice:0:(currentPage + 1) * itemsPerPage" cdkDrag>
         <!--     фильтруем в функции taskIncluded по currenTasksPage(Важные задачи, Мои задачи, Удаленные, Выполненные)     -->
-          <ng-container *ngIf="task && currentTasksPage && taskIncluded(currentTasksPage, task)">
+          <ng-container *ngIf="task && currentTasksPage && (taskIncluded(task, currentTasksPage) | async)">
 
           <!--     Через функцию showNotDeletedTasks фильтруем чтобы удаленные задачи
                 могли быть только в странице удаленных задач, не удаленные в других

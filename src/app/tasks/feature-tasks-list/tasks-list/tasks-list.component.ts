@@ -1,6 +1,6 @@
 import {
   ChangeDetectionStrategy,
-  Component, EventEmitter, inject,
+  Component, DestroyRef, EventEmitter, inject,
   Input, Output,
 } from '@angular/core';
 import {CdkDrag, CdkDragDrop, CdkDragHandle, CdkDropList, moveItemInArray} from "@angular/cdk/drag-drop";
@@ -12,11 +12,12 @@ import {TagComponent} from "../../../shared/ui/tag/tag.component";
 import {BadgeComponent} from "../../../shared/ui/badge/badge.component";
 import {TasksDeleteButtonComponent} from "../../feature-tasks-delete/tasks-delete-button/tasks-delete-button.component";
 import {MatDivider} from "@angular/material/divider";
-import {BehaviorSubject} from "rxjs";
+import {BehaviorSubject, map, Observable} from "rxjs";
 import {HighlightDirective} from "../../../core/directives/highlight.directive";
 import {PersistenceService} from "../../../core/utils/persistence.service";
 import {FormControl, ReactiveFormsModule} from "@angular/forms";
 import {TasksService} from "../../data-access/tasks.service";
+import {takeUntilDestroyed} from "@angular/core/rxjs-interop";
 
 @Component({
   selector: 'tasks-list',
@@ -57,6 +58,7 @@ export class TasksListComponent {
 
   private readonly persistenceService = inject(PersistenceService)
   private readonly tasksService = inject(TasksService)
+  private readonly destroyRef = inject(DestroyRef)
 
 
   public filterChanges = new BehaviorSubject<string>('')
@@ -98,11 +100,20 @@ export class TasksListComponent {
     this.tasksService.onToggleTag(tag)
   }
 
-  taskIncluded(currentTaskPage: string, task: Task): boolean {
-    return task! && task.status && task.status.some((v) => {
-      return v.value === currentTaskPage || true
-    })
+  taskIncluded(task: Task, currentTaskPage: string): Observable<boolean> {
+    return this.filterChanges.pipe(
+      takeUntilDestroyed(this.destroyRef),
+      map((filter) => {
+        if (filter !== '') {
+          return true; // Если фильтр не пустой, вернуть true
+        } else {
+          return task.status.some((v) => v.value === currentTaskPage); // Иначе вернуть результат сравнения
+        }
+      })
+    );
   }
+
+
 
   onComplete(taskName: string) {
     const data: CompleteTask = {
