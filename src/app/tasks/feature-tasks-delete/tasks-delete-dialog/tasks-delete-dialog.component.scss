@@ -23,3 +23,13 @@ p {
 ui-button-filled {
   margin-right: 10px;
 }
+
+@media(max-width: 415px) {
+  .button-actions {
+    display: flex;
+    flex-direction: column;
+  }
+  ui-button-outline {
+    margin-top: 1rem;
+  }
+}
