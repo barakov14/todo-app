@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import {SidenavComponent} from "../core/layout/sidenav/sidenav.component";
 import {RouterOutlet} from "@angular/router";
+import { SidenavComponent } from '../../components/sidenav/sidenav.component';
 
 @Component({
   selector: 'home',

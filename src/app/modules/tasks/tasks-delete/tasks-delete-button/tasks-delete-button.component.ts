@@ -1,6 +1,6 @@
 import {ChangeDetectionStrategy, Component, DestroyRef, inject, Input} from '@angular/core';
 import {MatDialog, MatDialogRef} from "@angular/material/dialog";
-import {TasksService} from "../../data-access/tasks.service";
+import {TasksService} from "../../services/tasks.service";
 import {takeUntilDestroyed} from "@angular/core/rxjs-interop";
 import {TasksDeleteDialogComponent} from "../tasks-delete-dialog/tasks-delete-dialog.component";
 

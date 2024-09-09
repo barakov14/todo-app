@@ -3,13 +3,11 @@ import {ButtonFilledComponent} from "../../../shared/ui/button-filled/button-fil
 import {TagComponent} from "../../../shared/ui/tag/tag.component";
 import {AsyncPipe, NgClass, NgForOf} from "@angular/common";
 import {tags} from "../../mock/tags.mock";
-import {
-  TasksCreateButtonComponent
-} from "../../../tasks/feature-tasks-create/tasks-create-button/tasks-create-button.component";
-import {Router, RouterLink, RouterLinkActive} from "@angular/router";
-import {TasksService} from "../../../tasks/data-access/tasks.service";
+import {RouterLink, RouterLinkActive} from "@angular/router";
 import {takeUntilDestroyed} from "@angular/core/rxjs-interop";
-import {map, Observable, tap} from "rxjs";
+import {map, Observable} from "rxjs";
+import { TasksCreateButtonComponent } from '../../../modules/tasks/feature-tasks-create/tasks-create-button/tasks-create-button.component';
+import { TasksService } from '../../../modules/tasks/data-access/tasks.service';
 
 @Component({
   selector: 'sidenav',

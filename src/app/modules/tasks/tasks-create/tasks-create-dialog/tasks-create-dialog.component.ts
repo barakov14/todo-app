@@ -1,17 +1,17 @@
 import {ChangeDetectionStrategy, Component, inject} from '@angular/core';
 import {MatDialogModule, MatDialogRef} from "@angular/material/dialog";
-import {DatepickerComponent} from "../../../shared/ui/datepicker/datepicker.component";
-import {ButtonFilledComponent} from "../../../shared/ui/button-filled/button-filled.component";
-import {ButtonOutlineComponent} from "../../../shared/ui/button-outline/button-outline.component";
-import {InputDirective} from "../../../shared/ui/input/input.directive";
 import {FormBuilder, FormControl, ReactiveFormsModule, Validators} from "@angular/forms";
 import {AsyncPipe, NgForOf, NgIf} from "@angular/common";
 import {MatCheckbox} from "@angular/material/checkbox";
-import {tags} from "../../../core/mock/tags.mock";
-import {CreateTask, TaskStatus, TaskStatusEnum} from "../../../core/api-types/task";
-import {TextareaDirective} from "../../../shared/ui/input/textarea.directive";
 import {BehaviorSubject} from "rxjs";
-import {DateValidator} from "../../../core/validators/date.validator";
+import { DatepickerComponent } from '../../../../shared/ui/datepicker/datepicker.component';
+import { InputDirective } from '../../../../shared/ui/input/input.directive';
+import { DateValidator } from '../../../../core/validators/date.validator';
+import { TextareaDirective } from '../../../../shared/ui/input/textarea.directive';
+import { ButtonFilledComponent } from '../../../../shared/ui/button-filled/button-filled.component';
+import { ButtonOutlineComponent } from '../../../../shared/ui/button-outline/button-outline.component';
+import { tags } from '../../../../core/mock/tags.mock';
+import {CreateTask, TaskStatus, TaskStatusEnum } from '../../../../core/api-types/task';
 
 @Component({
   selector: 'tasks-create-dialog',

@@ -1,10 +1,10 @@
 import {ChangeDetectionStrategy, Component, DestroyRef, inject} from '@angular/core';
-import {ButtonFilledComponent} from "../../../shared/ui/button-filled/button-filled.component";
+import {ButtonFilledComponent} from "../../../../shared/ui/button-filled/button-filled.component";
 import {MatDialog, MatDialogRef} from "@angular/material/dialog";
 import {TasksCreateDialogComponent} from "../tasks-create-dialog/tasks-create-dialog.component";
 import {takeUntilDestroyed} from "@angular/core/rxjs-interop";
-import {CreateTask} from "../../../core/api-types/task";
-import {TasksService} from "../../data-access/tasks.service";
+import {CreateTask} from "../../../../core/api-types/task";
+import {TasksService} from "../../services/tasks.service";
 
 @Component({
   selector: 'tasks-create-button',

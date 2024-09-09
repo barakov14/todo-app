@@ -1,7 +1,7 @@
 import {ChangeDetectionStrategy, Component, inject} from '@angular/core';
-import {ButtonFilledComponent} from "../../../shared/ui/button-filled/button-filled.component";
-import {ButtonOutlineComponent} from "../../../shared/ui/button-outline/button-outline.component";
 import {MatDialogClose, MatDialogRef} from "@angular/material/dialog";
+import { ButtonFilledComponent } from '../../../../shared/ui/button-filled/button-filled.component';
+import { ButtonOutlineComponent } from '../../../../shared/ui/button-outline/button-outline.component';
 
 @Component({
   selector: 'tasks-delete-dialog',

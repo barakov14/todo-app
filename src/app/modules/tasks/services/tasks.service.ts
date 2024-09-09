@@ -1,7 +1,7 @@
 import {inject, Injectable} from "@angular/core";
 import {BehaviorSubject} from "rxjs";
-import {CompleteTask, CreateTask, Task, TaskStatusEnum} from "../../core/api-types/task";
-import {PersistenceService} from "../../core/utils/persistence.service";
+import {CompleteTask, CreateTask, Task, TaskStatusEnum} from "../../../core/api-types/task";
+import {PersistenceService} from "../../../core/utils/persistence.service";
 import {Router} from "@angular/router";
 
 @Injectable({providedIn: 'root'})
@@ -9,8 +9,6 @@ import {Router} from "@angular/router";
 export class TasksService {
   private readonly persistenceService = inject(PersistenceService)
   private readonly router = inject(Router)
-
-  // cтейт менеджмент через бейхейвер сабджекты
 
   public currentTasksPage = new BehaviorSubject<null | string>(null)
   public tasksList = new BehaviorSubject<null | Task[]>(null)

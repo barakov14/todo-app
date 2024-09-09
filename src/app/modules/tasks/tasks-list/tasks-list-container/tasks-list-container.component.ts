@@ -2,11 +2,11 @@ import {ChangeDetectionStrategy, Component, DestroyRef, inject, OnInit} from '@a
 import {TasksListComponent} from "../tasks-list/tasks-list.component";
 import {ActivatedRoute, Params} from "@angular/router";
 import {takeUntilDestroyed} from "@angular/core/rxjs-interop";
-import {StringService} from "../../../core/utils/string.service";
-import {TasksService} from "../../data-access/tasks.service";
 import {AsyncPipe} from "@angular/common";
-import {CompleteTask} from "../../../core/api-types/task";
 import {BehaviorSubject} from "rxjs";
+import { TasksService } from '../../services/tasks.service';
+import { StringService } from '../../../../core/utils/string.service';
+import { CompleteTask } from '../../../../core/api-types/task';
 
 @Component({
   selector: 'tasks-list-container',

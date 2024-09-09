@@ -4,13 +4,13 @@ export const routes: Routes = [
   {
     path: 'my',
     loadComponent: () =>
-      import('./home/home.component')
+      import('./core/containers/home/home.component')
         .then((c) => c.HomeComponent),
     children: [
       {
         path: ':task',
         loadComponent: () =>
-          import('./tasks/feature-tasks-list/tasks-list-container/tasks-list-container.component')
+          import('./modules/tasks/tasks-list/tasks-list-container/tasks-list-container.component')
             .then((c) => c.TasksListContainerComponent)
       }
     ]
