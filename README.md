@@ -1,25 +1,5 @@
 # TodoApp
 
-Архитектура приложение построен на доменной области, shared модули для ui,
-
-папка core для глобальных сервисов, интерфейсов и разных утилит,
-
-home компонент как родитель,
-
-доменная область tasks,
-
-разделения на dumb и smart компонентов, то есть container и тупой компонент
-
-data access папка для хранения сервисов и стейт менеджеров
-
-разделение button и dialog, чтобы удобнее работать с модальными окнами
-
-Есть момент:
-использовал checkbox, datepicker, dialog, drag and drop от Angular Material,
-не смог самостоятельно реализовать, так как не поддаются для стилей
-
-Demo можете посмотреть тут: https://todo-app-34ae4.web.app/
-
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.3.6.
 
 ## Development server
