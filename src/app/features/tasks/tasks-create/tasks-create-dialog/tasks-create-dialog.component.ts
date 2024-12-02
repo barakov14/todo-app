@@ -4,12 +4,12 @@ import {FormBuilder, FormControl, ReactiveFormsModule, Validators} from "@angula
 import {AsyncPipe, NgForOf, NgIf} from "@angular/common";
 import {MatCheckbox} from "@angular/material/checkbox";
 import {BehaviorSubject} from "rxjs";
-import { DatepickerComponent } from '../../../../shared/ui/datepicker/datepicker.component';
-import { InputDirective } from '../../../../shared/ui/input/input.directive';
+import { DatepickerComponent } from '../../../../shared/components/datepicker/datepicker.component';
+import { InputDirective } from '../../../../shared/components/input/input.directive';
 import { DateValidator } from '../../../../core/validators/date.validator';
-import { TextareaDirective } from '../../../../shared/ui/input/textarea.directive';
-import { ButtonFilledComponent } from '../../../../shared/ui/button-filled/button-filled.component';
-import { ButtonOutlineComponent } from '../../../../shared/ui/button-outline/button-outline.component';
+import { TextareaDirective } from '../../../../shared/components/input/textarea.directive';
+import { ButtonFilledComponent } from '../../../../shared/components/button-filled/button-filled.component';
+import { ButtonOutlineComponent } from '../../../../shared/components/button-outline/button-outline.component';
 import { tags } from '../../../../core/mock/tags.mock';
 import {CreateTask, TaskStatus, TaskStatusEnum } from '../../../../core/api-types/task';
 

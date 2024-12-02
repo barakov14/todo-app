@@ -1,7 +1,7 @@
 <div class="container">
   <div class="tasks">
 <!--    Реализация поисковика-->
-    <ui-search-input (onSearch)="onSearch($event)"></ui-search-input>
+<!--    <components-search-input (onSearch)="onSearch($event)"></components-search-input>-->
     <!--  Тут мы указываем значение params от роуты  -->
     <h2 *ngIf="userSearching; else notSearching">{{ userSearching }}</h2>
     <ng-template #notSearching>
@@ -24,11 +24,11 @@
             <div class="tasks-list__item" *ngIf="showNotDeletedTasks(currentTasksPage, task)"  [ngClass]="{'deleted-page': !notInDeletedPage(currentTasksPage)}">
               <div class="tasks-list__item__name">
             <!--     Убираем чекбокс, если находимя в странице удаленных задач           -->
-                <mat-checkbox *ngIf="notInDeletedPage(currentTasksPage)" [formControl]="complete" [checked]="(isCompleted(task.name) | async)" (change)="onComplete(task.name)"></mat-checkbox>
+<!--                <mat-checkbox *ngIf="notInDeletedPage(currentTasksPage)" [formControl]="complete" [checked]="(isCompleted(task.name) | async)" (change)="onComplete(task.name)"></mat-checkbox>-->
             <!--       Убираем желтый цвет важной задачи в странице важных задач через ngClass
              Также через highlight накладываем стили на выделенный текст при поиске задач
              -->
-                <div class="name" highlight [search]="filterChanges | async"
+                <div class="name" tdHighlight [search]="filterChanges | async"
                      [ngClass]="{'important': isImportant(task) && notInImportantPage(currentTasksPage)}"
                      [innerHtml]="task?.name">
                 </div>
@@ -37,7 +37,7 @@
                 <div class="tasks-list__item__footer__info">
                   <div class="tasks-list__item__badge">
                     <div *ngFor="let tag of task.tags">
-                      <ui-badge [badge]="tag" (click)="onToggleTag(tag)"></ui-badge>
+<!--                      <components-badge [badge]="tag" (click)="onToggleTag(tag)"></components-badge>-->
                     </div>
                   </div>
                   <div class="tasks-list__item__footer__date">
@@ -46,7 +46,7 @@
                 </div>
                 <div class="tasks-list__item__footer__actions">
                   <ng-container *ngIf="notInDeletedPage(currentTasksPage); else inDeletedPage">
-                    <tasks-delete-button [taskName]="task.name"></tasks-delete-button>
+<!--                    <tasks-delete-button [taskName]="task.name"></tasks-delete-button>-->
                     <i class="ri-draggable" cdkDragHandle></i>
                   </ng-container>
                   <ng-template #inDeletedPage>
@@ -55,7 +55,7 @@
                 </div>
               </div>
             </div>
-            <mat-divider></mat-divider>
+<!--            <mat-divider></mat-divider>-->
           </ng-container>
         </div>
       </div>

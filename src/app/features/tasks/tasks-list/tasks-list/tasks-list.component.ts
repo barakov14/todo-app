@@ -5,19 +5,13 @@ import {
 } from '@angular/core';
 import {CdkDrag, CdkDragDrop, CdkDragHandle, CdkDropList, moveItemInArray} from "@angular/cdk/drag-drop";
 import {AsyncPipe, DatePipe, NgClass, NgFor, NgIf, SlicePipe} from "@angular/common";
-import {MatCheckbox} from "@angular/material/checkbox";
-import {MatDivider} from "@angular/material/divider";
 import {BehaviorSubject, map, Observable, of} from "rxjs";
 import {FormControl, ReactiveFormsModule} from "@angular/forms";
 import {takeUntilDestroyed} from "@angular/core/rxjs-interop";
-import { SearchInputComponent } from '../../../../shared/ui/search-input/search-input.component';
-import { TasksDeleteButtonComponent } from '../../tasks-delete/tasks-delete-button/tasks-delete-button.component';
-import { HighlightDirective } from '../../../../core/directives/highlight.directive';
+import { HighlightDirective } from '../../../../shared/directives/highlight/highlight.directive';
 import {CompleteTask, Task, TaskStatusEnum } from '../../../../core/api-types/task';
 import { PersistenceService } from '../../../../core/utils/persistence.service';
 import { TasksService } from '../../services/tasks.service';
-import { BadgeComponent } from '../../../../shared/ui/badge/badge.component';
-import { TagComponent } from '../../../../shared/ui/tag/tag.component';
 
 @Component({
     selector: 'tasks-list',
@@ -25,13 +19,7 @@ import { TagComponent } from '../../../../shared/ui/tag/tag.component';
         CdkDropList,
         NgFor,
         CdkDrag,
-        SearchInputComponent,
-        MatCheckbox,
-        TagComponent,
-        BadgeComponent,
         DatePipe,
-        TasksDeleteButtonComponent,
-        MatDivider,
         NgClass,
         CdkDragHandle,
         NgIf,

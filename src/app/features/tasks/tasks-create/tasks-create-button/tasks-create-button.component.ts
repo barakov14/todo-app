@@ -1,5 +1,5 @@
 import {ChangeDetectionStrategy, Component, DestroyRef, inject} from '@angular/core';
-import {ButtonFilledComponent} from "../../../../shared/ui/button-filled/button-filled.component";
+import {ButtonFilledComponent} from "../../../../shared/components/button-filled/button-filled.component";
 import {MatDialog, MatDialogRef} from "@angular/material/dialog";
 import {TasksCreateDialogComponent} from "../tasks-create-dialog/tasks-create-dialog.component";
 import {takeUntilDestroyed} from "@angular/core/rxjs-interop";

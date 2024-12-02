@@ -1,6 +1,4 @@
 import {ChangeDetectionStrategy, Component, DestroyRef, inject} from '@angular/core';
-import {ButtonFilledComponent} from "../../../shared/ui/button-filled/button-filled.component";
-import {TagComponent} from "../../../shared/ui/tag/tag.component";
 import {AsyncPipe, NgClass, NgForOf} from "@angular/common";
 import {tags} from "../../mock/tags.mock";
 import {RouterLink, RouterLinkActive} from "@angular/router";

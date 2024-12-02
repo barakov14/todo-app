@@ -1,0 +1,32 @@
+.td-btn {
+  padding: 10px 23px;
+  border-radius: 5px;
+  font-size: 14px;
+  transition: ease-in 0.3s;
+  cursor: pointer;
+
+  &:hover {
+    cursor: pointer;
+    background-color: #8479F5;
+    transition: ease-in 0.3s;
+  }
+}
+
+.td-btn-fill {
+  border: none;
+  background-color: #7367F0;
+  color: #fff;
+  &:hover {
+    background-color: #8479F5;
+  }
+}
+
+.td-btn-outline {
+  border: 1px solid #7367F0;
+  background: none;
+  color: #7367F0;
+  &:hover {
+    color: #fff;
+    border: 1px solid #8479F5;
+  }
+}

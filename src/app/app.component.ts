@@ -1,10 +1,11 @@
 import {ChangeDetectionStrategy, Component} from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import {DatepickerComponent} from "./shared/ui/datepicker/datepicker.component";
+import {ButtonDirective} from "./shared/directives/button/button.directive";
+import {TagComponent} from "./shared/components/tag/tag.component";
 
 @Component({
     selector: 'app-root',
-    imports: [RouterOutlet, DatepickerComponent],
+  imports: [RouterOutlet, ButtonDirective, TagComponent],
     templateUrl: './app.component.html',
     styleUrl: './app.component.scss',
     changeDetection: ChangeDetectionStrategy.OnPush
