@@ -1,26 +1,34 @@
-import {ChangeDetectionStrategy, Component, Input, input} from '@angular/core';
-import {BadgeDirective} from "./badge.directive";
-import {NgClass} from "@angular/common";
+import {ChangeDetectionStrategy, Component, ElementRef,OnInit, viewChild} from '@angular/core';
 
 @Component({
-    selector: 'components-badge',
-    imports: [
-        BadgeDirective,
-        NgClass
-    ],
+    selector: 'td-badge',
     templateUrl: './badge.component.html',
     styleUrl: './badge.component.scss',
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class BadgeComponent {
-  @Input() badge!:string
+export class BadgeComponent implements OnInit{
 
-  get badgeClasses() {
-    return {
-      'badge-productivity': this.badge === 'Продуктивность',
-      'badge-education': this.badge === 'Образование',
-      'badge-health': this.badge === 'Здоровье',
-      'badge-urgent': this.badge === 'Срочно'
-    };
+  content = viewChild.required<ElementRef<HTMLDivElement>>('content')
+
+  ngOnInit() {
+    const content = this.content().nativeElement;
+
+    switch (content.innerText) {
+      case 'Продуктивность':
+        content.classList.add('badge-productivity')
+        break;
+      case 'Здоровье':
+        content.classList.add('badge-health')
+        break;
+      case 'Образование':
+        content.classList.add('badge-education')
+        break;
+      case 'Срочно':
+        content.classList.add('badge-urgent')
+        break;
+      default:
+        content.classList.add('badge-productivity')
+        break;
+    }
   }
 }

@@ -42,7 +42,8 @@ export class TagComponent implements OnInit {
         circleIconEl.classList.add('urgent')
         break;
       default:
-          circleIconEl.classList.add('proctivity')
+        circleIconEl.classList.add('productivity')
+        break;
     }
   }
 }

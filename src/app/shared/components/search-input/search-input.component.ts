@@ -1,33 +1,49 @@
-import {ChangeDetectionStrategy, Component, DestroyRef, EventEmitter, inject, Output} from '@angular/core';
-import {FormControl, ReactiveFormsModule} from "@angular/forms";
-import {takeUntilDestroyed} from "@angular/core/rxjs-interop";
-import {debounceTime} from "rxjs";
+import {
+  ChangeDetectionStrategy,
+  Component,
+  forwardRef,
+  signal
+} from '@angular/core';
+import {ControlValueAccessor, NG_VALUE_ACCESSOR, ReactiveFormsModule} from "@angular/forms";
 
 @Component({
-    selector: 'components-search-input',
+    selector: 'td-search-input',
     imports: [
         ReactiveFormsModule
     ],
     templateUrl: './search-input.component.html',
     styleUrl: './search-input.component.scss',
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    providers: [
+      {
+        provide: NG_VALUE_ACCESSOR,
+        useExisting: forwardRef(() => SearchInputComponent),
+        multi: true,
+      },
+    ],
 })
-export class SearchInputComponent {
+export class SearchInputComponent implements ControlValueAccessor {
+  value = signal<string>('')
 
-  private readonly destroyRef = inject(DestroyRef)
+  onChange = (value: string) => {}
+  onTouched = () => {}
 
-  filter = new FormControl('')
+  writeValue(value: string): void {
+    this.value.set(value)
+  }
 
-  @Output() onSearch = new EventEmitter<string>()
+  registerOnChange(fn: (value: string) => void): void {
+    this.onChange = fn
+  }
 
-  constructor() {
-    this.filter.valueChanges.pipe(
-      debounceTime(200),
-      takeUntilDestroyed(this.destroyRef)
-    ).subscribe(
-      (v) => {
-        this.onSearch.emit(v as string)
-      }
-    )
+  registerOnTouched(fn: () => void): void {
+    this.onTouched = fn
+  }
+
+  onInput(event: Event) {
+    const input = event.target as HTMLInputElement
+    this.value.set(input.value)
+    this.onChange(this.value())
+    this.onTouched()
   }
 }

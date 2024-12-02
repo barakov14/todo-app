@@ -6,11 +6,11 @@
   background: none;
   color: #B9B9C3;
 }
-.field {
+:host {
   display: flex;
   align-items: center;
 }
 
-.field i {
+i {
   margin-right: 5px;
 }

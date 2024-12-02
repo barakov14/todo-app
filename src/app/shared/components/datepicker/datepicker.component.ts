@@ -1,26 +1,48 @@
-/*
-import {ChangeDetectionStrategy, Component, EventEmitter, Output} from '@angular/core';
 
-import {FormControl, FormsModule, ReactiveFormsModule} from "@angular/forms";
+import {ChangeDetectionStrategy, Component, forwardRef, signal} from '@angular/core';
+
+import {ControlValueAccessor, FormsModule, NG_VALUE_ACCESSOR, ReactiveFormsModule} from "@angular/forms";
 
 @Component({
-    selector: 'components-datepicker',
-    imports: [
-      FormsModule,
-      ReactiveFormsModule
-    ],
+    selector: 'td-datepicker',
+  imports: [
+    FormsModule,
+    ReactiveFormsModule,
+  ],
     templateUrl: './datepicker.component.html',
     styleUrl: './datepicker.component.scss',
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    providers: [
+      {
+        provide: NG_VALUE_ACCESSOR,
+        useExisting: forwardRef(() => DatepickerComponent),
+        multi: true,
+      },
+    ],
 })
-export class DatepickerComponent {
-  @Output() dateChanged = new EventEmitter<Date>()
+export class DatepickerComponent implements ControlValueAccessor {
+  value = signal<string>('')
 
-  public date = new FormControl()
+  onChange = (value: string) => {}
+  onTouched = () => {}
 
+  writeValue(value: string): void {
+    this.value.set(value)
+  }
 
-  onDateChanged() {
-    this.dateChanged.emit(this.date.value)
+  registerOnChange(fn: (value: string) => void): void {
+    this.onChange = fn
+  }
+
+  registerOnTouched(fn: () => void): void {
+    this.onTouched = fn
+  }
+
+  onInput(event: Event) {
+    const input = event.target as HTMLInputElement
+    this.value.set(input.value)
+    this.onChange(this.value())
+    this.onTouched()
   }
 }
-*/
+

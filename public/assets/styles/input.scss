@@ -1,0 +1,53 @@
+/* Стиль для текстовой области по умолчанию */
+.textarea {
+  border: 1px solid #3B4253;
+  border-radius: 5px;
+  color: #E0E0E0;
+  padding: 7px 14px;
+  width: 100%;
+  background: none;
+  outline: none;
+}
+
+.textarea:focus {
+  border-color: #3B4253;
+}
+
+/* Стиль для текстовой области с ошибкой */
+.textarea-error {
+  border: 1px solid #EB5757;
+}
+
+.textarea-error:focus {
+  border-color: #EB5757;
+}
+
+.input {
+  border: 1px solid #3B4253;
+  border-radius: 5px;
+  color: #E0E0E0;
+  padding: 7px 14px;
+  width: 100%;
+  background: none;
+  outline: none;
+}
+
+.input:focus {
+  border-color: #3B4253;
+}
+
+/* Стиль для поля ввода с ошибкой */
+.input-error {
+  border: 1px solid #EB5757;
+}
+
+.input-error:focus {
+  border-color: #EB5757;
+}
+
+/* Стиль для отображения сообщения об ошибке */
+.error-message {
+  color: #EB5757;
+  margin-top: 7px;
+  font-size: 14px;
+}

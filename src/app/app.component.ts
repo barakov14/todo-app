@@ -1,11 +1,11 @@
-import {ChangeDetectionStrategy, Component} from '@angular/core';
-import { RouterOutlet } from '@angular/router';
-import {ButtonDirective} from "./shared/directives/button/button.directive";
-import {TagComponent} from "./shared/components/tag/tag.component";
+import {ChangeDetectionStrategy, Component, OnInit} from '@angular/core';
+import {SearchInputComponent} from "./shared/components/search-input/search-input.component";
+import {FormControl, ReactiveFormsModule} from "@angular/forms";
+import {DatepickerComponent} from "./shared/components";
 
 @Component({
     selector: 'app-root',
-  imports: [RouterOutlet, ButtonDirective, TagComponent],
+  imports: [SearchInputComponent, ReactiveFormsModule, DatepickerComponent],
     templateUrl: './app.component.html',
     styleUrl: './app.component.scss',
     changeDetection: ChangeDetectionStrategy.OnPush
