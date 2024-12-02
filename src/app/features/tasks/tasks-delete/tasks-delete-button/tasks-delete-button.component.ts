@@ -5,12 +5,11 @@ import {takeUntilDestroyed} from "@angular/core/rxjs-interop";
 import {TasksDeleteDialogComponent} from "../tasks-delete-dialog/tasks-delete-dialog.component";
 
 @Component({
-  selector: 'tasks-delete-button',
-  standalone: true,
-  imports: [],
-  templateUrl: './tasks-delete-button.component.html',
-  styleUrl: './tasks-delete-button.component.scss',
-  changeDetection: ChangeDetectionStrategy.OnPush
+    selector: 'tasks-delete-button',
+    imports: [],
+    templateUrl: './tasks-delete-button.component.html',
+    styleUrl: './tasks-delete-button.component.scss',
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class TasksDeleteButtonComponent {
   private readonly dialog = inject(MatDialog)

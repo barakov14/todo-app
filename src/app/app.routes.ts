@@ -10,7 +10,7 @@ export const routes: Routes = [
       {
         path: ':task',
         loadComponent: () =>
-          import('./modules/tasks/tasks-list/tasks-list-container/tasks-list-container.component')
+          import('./features/tasks/tasks-list/tasks-list-container/tasks-list-container.component')
             .then((c) => c.TasksListContainerComponent)
       }
     ]

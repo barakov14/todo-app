@@ -14,24 +14,23 @@ import { tags } from '../../../../core/mock/tags.mock';
 import {CreateTask, TaskStatus, TaskStatusEnum } from '../../../../core/api-types/task';
 
 @Component({
-  selector: 'tasks-create-dialog',
-  standalone: true,
-  imports: [
-    MatDialogModule,
-    DatepickerComponent,
-    ButtonFilledComponent,
-    ButtonOutlineComponent,
-    InputDirective,
-    ReactiveFormsModule,
-    NgIf,
-    MatCheckbox,
-    NgForOf,
-    TextareaDirective,
-    AsyncPipe
-  ],
-  templateUrl: './tasks-create-dialog.component.html',
-  styleUrl: './tasks-create-dialog.component.scss',
-  changeDetection: ChangeDetectionStrategy.OnPush
+    selector: 'tasks-create-dialog',
+    imports: [
+        MatDialogModule,
+        DatepickerComponent,
+        ButtonFilledComponent,
+        ButtonOutlineComponent,
+        InputDirective,
+        ReactiveFormsModule,
+        NgIf,
+        MatCheckbox,
+        NgForOf,
+        TextareaDirective,
+        AsyncPipe
+    ],
+    templateUrl: './tasks-create-dialog.component.html',
+    styleUrl: './tasks-create-dialog.component.scss',
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class TasksCreateDialogComponent {
   private readonly dialogRef = inject(MatDialogRef)

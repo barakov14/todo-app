@@ -7,14 +7,13 @@ import {CreateTask} from "../../../../core/api-types/task";
 import {TasksService} from "../../services/tasks.service";
 
 @Component({
-  selector: 'tasks-create-button',
-  standalone: true,
+    selector: 'tasks-create-button',
     imports: [
         ButtonFilledComponent
     ],
-  templateUrl: './tasks-create-button.component.html',
-  styleUrl: './tasks-create-button.component.scss',
-  changeDetection: ChangeDetectionStrategy.OnPush
+    templateUrl: './tasks-create-button.component.html',
+    styleUrl: './tasks-create-button.component.scss',
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class TasksCreateButtonComponent {
   private readonly dialog = inject(MatDialog)

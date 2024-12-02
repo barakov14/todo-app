@@ -4,16 +4,15 @@ import { ButtonFilledComponent } from '../../../../shared/ui/button-filled/butto
 import { ButtonOutlineComponent } from '../../../../shared/ui/button-outline/button-outline.component';
 
 @Component({
-  selector: 'tasks-delete-dialog',
-  standalone: true,
-  imports: [
-    ButtonFilledComponent,
-    ButtonOutlineComponent,
-    MatDialogClose
-  ],
-  templateUrl: './tasks-delete-dialog.component.html',
-  styleUrl: './tasks-delete-dialog.component.scss',
-  changeDetection: ChangeDetectionStrategy.OnPush
+    selector: 'tasks-delete-dialog',
+    imports: [
+        ButtonFilledComponent,
+        ButtonOutlineComponent,
+        MatDialogClose
+    ],
+    templateUrl: './tasks-delete-dialog.component.html',
+    styleUrl: './tasks-delete-dialog.component.scss',
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class TasksDeleteDialogComponent {
 

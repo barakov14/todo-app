@@ -9,15 +9,14 @@ import { StringService } from '../../../../core/utils/string.service';
 import { CompleteTask } from '../../../../core/api-types/task';
 
 @Component({
-  selector: 'tasks-list-container',
-  standalone: true,
-  imports: [
-    TasksListComponent,
-    AsyncPipe
-  ],
-  templateUrl: './tasks-list-container.component.html',
-  styleUrl: './tasks-list-container.component.scss',
-  changeDetection: ChangeDetectionStrategy.OnPush
+    selector: 'tasks-list-container',
+    imports: [
+        TasksListComponent,
+        AsyncPipe
+    ],
+    templateUrl: './tasks-list-container.component.html',
+    styleUrl: './tasks-list-container.component.scss',
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class TasksListContainerComponent implements OnInit {
   private readonly route = inject(ActivatedRoute)

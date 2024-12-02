@@ -20,30 +20,29 @@ import { BadgeComponent } from '../../../../shared/ui/badge/badge.component';
 import { TagComponent } from '../../../../shared/ui/tag/tag.component';
 
 @Component({
-  selector: 'tasks-list',
-  standalone: true,
-  imports: [
-    CdkDropList,
-    NgFor,
-    CdkDrag,
-    SearchInputComponent,
-    MatCheckbox,
-    TagComponent,
-    BadgeComponent,
-    DatePipe,
-    TasksDeleteButtonComponent,
-    MatDivider,
-    NgClass,
-    CdkDragHandle,
-    NgIf,
-    AsyncPipe,
-    HighlightDirective,
-    ReactiveFormsModule,
-    SlicePipe
-  ],
-  templateUrl: './tasks-list.component.html',
-  styleUrl: './tasks-list.component.scss',
-  changeDetection: ChangeDetectionStrategy.OnPush
+    selector: 'tasks-list',
+    imports: [
+        CdkDropList,
+        NgFor,
+        CdkDrag,
+        SearchInputComponent,
+        MatCheckbox,
+        TagComponent,
+        BadgeComponent,
+        DatePipe,
+        TasksDeleteButtonComponent,
+        MatDivider,
+        NgClass,
+        CdkDragHandle,
+        NgIf,
+        AsyncPipe,
+        HighlightDirective,
+        ReactiveFormsModule,
+        SlicePipe
+    ],
+    templateUrl: './tasks-list.component.html',
+    styleUrl: './tasks-list.component.scss',
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class TasksListComponent {
   @Input() currentTasksPage!: string | null

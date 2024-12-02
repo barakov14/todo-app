@@ -3,15 +3,14 @@ import {BadgeDirective} from "./badge.directive";
 import {NgClass} from "@angular/common";
 
 @Component({
-  selector: 'ui-badge',
-  standalone: true,
-  imports: [
-    BadgeDirective,
-    NgClass
-  ],
-  templateUrl: './badge.component.html',
-  styleUrl: './badge.component.scss',
-  changeDetection: ChangeDetectionStrategy.OnPush
+    selector: 'ui-badge',
+    imports: [
+        BadgeDirective,
+        NgClass
+    ],
+    templateUrl: './badge.component.html',
+    styleUrl: './badge.component.scss',
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class BadgeComponent {
   @Input() badge!:string

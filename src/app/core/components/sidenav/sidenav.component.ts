@@ -6,17 +6,12 @@ import {tags} from "../../mock/tags.mock";
 import {RouterLink, RouterLinkActive} from "@angular/router";
 import {takeUntilDestroyed} from "@angular/core/rxjs-interop";
 import {map, Observable} from "rxjs";
-import { TasksCreateButtonComponent } from '../../../modules/tasks/feature-tasks-create/tasks-create-button/tasks-create-button.component';
-import { TasksService } from '../../../modules/tasks/data-access/tasks.service';
+import {TasksService} from "../../../features/tasks/services/tasks.service";
 
 @Component({
   selector: 'sidenav',
-  standalone: true,
   imports: [
-    ButtonFilledComponent,
-    TagComponent,
     NgForOf,
-    TasksCreateButtonComponent,
     RouterLink,
     NgClass,
     RouterLinkActive,

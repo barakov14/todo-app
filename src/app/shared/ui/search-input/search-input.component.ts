@@ -4,14 +4,13 @@ import {takeUntilDestroyed} from "@angular/core/rxjs-interop";
 import {debounceTime} from "rxjs";
 
 @Component({
-  selector: 'ui-search-input',
-  standalone: true,
-  imports: [
-    ReactiveFormsModule
-  ],
-  templateUrl: './search-input.component.html',
-  styleUrl: './search-input.component.scss',
-  changeDetection: ChangeDetectionStrategy.OnPush
+    selector: 'ui-search-input',
+    imports: [
+        ReactiveFormsModule
+    ],
+    templateUrl: './search-input.component.html',
+    styleUrl: './search-input.component.scss',
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class SearchInputComponent {
 
