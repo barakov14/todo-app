@@ -25,7 +25,7 @@
             <div class="tasks-list__item" *ngIf="showNotDeletedTasks(currentTasksPage, task)"  [ngClass]="{'deleted-page': !notInDeletedPage(currentTasksPage)}">
               <div class="tasks-list__item__name">
             &lt;!&ndash;     Убираем чекбокс, если находимя в странице удаленных задач           &ndash;&gt;
-&lt;!&ndash;                <mat-checkbox *ngIf="notInDeletedPage(currentTasksPage)" [formControl]="complete" [checked]="(isCompleted(task.name) | async)" (change)="onComplete(task.name)"></mat-checkbox>&ndash;&gt;
+&lt;!&ndash;                <mat-checkbox-group *ngIf="notInDeletedPage(currentTasksPage)" [formControl]="complete" [checked]="(isCompleted(task.name) | async)" (change)="onComplete(task.name)"></mat-checkbox-group>&ndash;&gt;
             &lt;!&ndash;       Убираем желтый цвет важной задачи в странице важных задач через ngClass
              Также через highlight накладываем стили на выделенный текст при поиске задач
              &ndash;&gt;

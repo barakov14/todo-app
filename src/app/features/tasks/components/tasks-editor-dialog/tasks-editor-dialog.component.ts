@@ -1,31 +1,33 @@
 import {ChangeDetectionStrategy, Component, inject} from '@angular/core';
-import {FormBuilder, FormControl, ReactiveFormsModule, Validators} from "@angular/forms";
-import {AsyncPipe, NgForOf, NgIf} from "@angular/common";
+import {FormArray, FormBuilder, FormControl, ReactiveFormsModule, Validators} from "@angular/forms";
+import {AsyncPipe, NgIf} from "@angular/common";
 import {BehaviorSubject} from "rxjs";
 import { DateValidator } from '../../../../core/validators/date.validator';
-import {CreateTask, TaskStatus, TaskStatusEnum } from '../../models/task';
 import {DialogRef} from "@angular/cdk/dialog";
 import {ButtonDirective} from "@td/shared/directives";
 import {InputDirective} from "../../../../shared/directives/input/input.directive";
-import {CheckboxComponent} from "../../../../shared/components/checkbox/checkbox.component";
+import {CheckboxComponent} from "../../../../shared/components/checkbox-group/checkbox/checkbox.component";
+import {CheckboxGroupComponent} from "../../../../shared/components/checkbox-group/checkbox-group.component";
 
 @Component({
     selector: 'tasks-editor-dialog',
   imports: [
     ReactiveFormsModule,
     NgIf,
-    NgForOf,
     AsyncPipe,
     ButtonDirective,
     InputDirective,
-    CheckboxComponent
+    CheckboxComponent,
+    CheckboxGroupComponent,
   ],
-    templateUrl: './tasks-create-dialog.component.html',
-    styleUrl: './tasks-create-dialog.component.scss',
+    templateUrl: './tasks-editor-dialog.component.html',
+    styleUrl: './tasks-editor-dialog.component.scss',
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class TasksCreateDialogComponent {
+export class TasksEditorDialogComponent {
   private readonly dialogRef = inject(DialogRef)
+
+  tags = ['Продуктивность', 'Образование', 'Здоровье', 'Срочно']
 
 
   public formGroup = new FormBuilder().group({
@@ -33,8 +35,12 @@ export class TasksCreateDialogComponent {
     description: new FormControl('', [Validators.required]),
     date: new FormControl(new Date(), [Validators.required, DateValidator]),
     isImportant: new FormControl(false),
-    tags: new FormControl()
+    tags: new FormArray([])
   })
+
+  constructor() {
+    this.formGroup.valueChanges.subscribe(console.log)
+  }
 
   public isFavorite: boolean = false
 
@@ -42,9 +48,12 @@ export class TasksCreateDialogComponent {
 
   public validatorsError = new BehaviorSubject<boolean>(false)
 
+  get tagsFormArray(): FormArray {
+    return this.formGroup.get('tags') as FormArray;
+  }
 
   onCreateTask() {
-    if(this.formGroup.valid) {
+    /*if(this.formGroup.valid) {
 
       const status: TaskStatus[] = []
       status.push({ value: TaskStatusEnum.myTasks });
@@ -65,7 +74,7 @@ export class TasksCreateDialogComponent {
       this.dialogRef.close(data)
     } else {
       this.validatorsError.next(true)
-    }
+    }*/
   }
 
   onFavorite() {
@@ -73,19 +82,19 @@ export class TasksCreateDialogComponent {
   }
 
 
+
   onPickDate(date: Date) {
     this.formGroup.controls.date.setValue(date)
     console.log(date)
   }
 
-  onToggleTag(tag: string) {
-    if(this.tagsForm.includes(tag)) {
-      this.tagsForm = this.tagsForm.filter(t => t !== tag);
-    } else {
-      this.tagsForm.push(tag)
-    }
-    this.formGroup.controls.tags.setValue(this.tagsForm)
-  }
+  onToggleTag(tag: string): void {
+    const index = this.tagsFormArray.controls.findIndex((control) => control.value === tag);
 
-  // protected readonly tags = tags;
+    if (index > -1) {
+      this.tagsFormArray.removeAt(index);
+    } else {
+      this.tagsFormArray.push(new FormControl(tag));
+    }
+  }
 }

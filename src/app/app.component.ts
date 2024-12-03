@@ -1,6 +1,6 @@
 import {ChangeDetectionStrategy, Component} from '@angular/core';
-import {ReactiveFormsModule} from "@angular/forms";
-import {CheckboxComponent} from "./shared/components/checkbox/checkbox.component";
+import {FormBuilder, ReactiveFormsModule} from "@angular/forms";
+import {CheckboxComponent} from "./shared/components/checkbox-group/checkbox/checkbox.component";
 import {RouterOutlet} from "@angular/router";
 
 @Component({
@@ -12,4 +12,5 @@ import {RouterOutlet} from "@angular/router";
 })
 export class AppComponent {
   title = 'todo-app';
+  form = new FormBuilder()
 }

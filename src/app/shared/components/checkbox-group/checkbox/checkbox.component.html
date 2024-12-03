@@ -2,9 +2,9 @@
   type="checkbox"
   class="checkbox"
   id="checkbox"
-  [value]="value()"
-  (input)="onInput($event)"
-  (blur)="onTouched()"
+  [checked]="checkboxGroup?.isSelected(value()!) || checked()"
+  (click)="checkboxGroup?.toggleValue(value()!)"
+  (change)="toggleValue(!checked())"
 />
 <label for="checkbox">
   <span class="checkbox-icon">

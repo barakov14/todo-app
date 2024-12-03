@@ -1,4 +1,6 @@
-<td-tasks-sidenav class="sidenav"/>
+<td-tasks-sidenav class="sidenav"
+                  (createTask)="onCreateTask()"
+/>
 <!--<tasks-list
   [currentTasksPage]="currentTasksPage | async"
   [tasksList]="tasksList | async"

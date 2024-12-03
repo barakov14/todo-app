@@ -4,6 +4,9 @@ import {TasksService} from "../../services/tasks.service";
 import {BehaviorSubject} from "rxjs";
 import {TasksDataService} from "../../services/tasks-data.service";
 import {TasksSidenavComponent} from "@td/features/tasks/components";
+import {Dialog} from "@angular/cdk/dialog";
+import {TasksEditorDialogComponent} from "../../components/tasks-editor-dialog/tasks-editor-dialog.component";
+import {takeUntilDestroyed} from "@angular/core/rxjs-interop";
 
 @Component({
   selector: 'td-tasks',
@@ -19,8 +22,19 @@ export class TasksComponent {
   private readonly route = inject(ActivatedRoute)
   private readonly tasksService = inject(TasksService)
   private readonly destroyRef = inject(DestroyRef)
+  private readonly dialog = inject(Dialog)
 
   public selectedTags = new BehaviorSubject<string[]>([])
+
+  onCreateTask() {
+    const dialogRef = this.dialog.open(TasksEditorDialogComponent, {
+      hasBackdrop: true
+    })
+
+    dialogRef.closed.pipe(
+      takeUntilDestroyed(this.destroyRef)
+    ).subscribe()
+  }
 
   /*constructor() {
     this.route.params.pipe(
