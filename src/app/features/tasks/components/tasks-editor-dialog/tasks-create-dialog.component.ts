@@ -6,6 +6,8 @@ import { DateValidator } from '../../../../core/validators/date.validator';
 import {CreateTask, TaskStatus, TaskStatusEnum } from '../../models/task';
 import {DialogRef} from "@angular/cdk/dialog";
 import {ButtonDirective} from "@td/shared/directives";
+import {InputDirective} from "../../../../shared/directives/input/input.directive";
+import {CheckboxComponent} from "../../../../shared/components/checkbox/checkbox.component";
 
 @Component({
     selector: 'tasks-editor-dialog',
@@ -14,7 +16,9 @@ import {ButtonDirective} from "@td/shared/directives";
     NgIf,
     NgForOf,
     AsyncPipe,
-    ButtonDirective
+    ButtonDirective,
+    InputDirective,
+    CheckboxComponent
   ],
     templateUrl: './tasks-create-dialog.component.html',
     styleUrl: './tasks-create-dialog.component.scss',

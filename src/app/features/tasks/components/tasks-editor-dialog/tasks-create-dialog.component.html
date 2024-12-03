@@ -9,7 +9,7 @@
         <ng-template #favorite>
           <i class="ri-star-fill" (click)="onFavorite()"></i>
         </ng-template>
-        <i class="ri-close-large-fill" mat-dialog-close></i>
+        <i class="ri-close-large-fill"></i>
       </div>
     </div>
     <div class="form">
@@ -22,14 +22,13 @@
             type="text"
             placeholder="Название задачи"
             formControlName="name"
-            ui-input
+            tdInput
             [required]="(validatorsError | async)! && !(formGroup.controls.name.valueChanges | async)"
-            errorText="Обязательное поле"
           >
         </div>
       </div>
       <div class="form-field">
-        <mat-checkbox formControlName="isImportant">Важная задача</mat-checkbox>
+        <td-checkbox formControlName="isImportant">Важная задача</td-checkbox>
       </div>
       <div class="form-field">
         <div class="form-field__title">Дата и время окончания</div>
@@ -44,20 +43,19 @@
             placeholder="Описание задачи"
             class="form-field__input__description"
             formControlName="description"
-            ui-textarea
+            tdInput
             [required]="(validatorsError | async)! && !(formGroup.controls.description.valueChanges | async)"
-            errorText="Обязательное поле"
           ></textarea>
         </div>
       </div>
       <div class="form-field">
         <div class="form-field__title">Тэги</div>
         <div class="form-field__checkbox">
-          <div class="form-field__checkbox__column" *ngFor="let element of tags">
+          <!--<div class="form-field__checkbox__column" *ngFor="let element of tags">
             <div class="form-field__checkbox__column__element">
               <input type="checkbox" (click)="onToggleTag(element.tag)">{{ element.tag }}</input>
             </div>
-          </div>
+          </div>-->
         </div>
       </div>
       <div class="form__actions">

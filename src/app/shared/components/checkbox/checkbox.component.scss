@@ -17,7 +17,7 @@ label[for="checkbox"] {
 .checkbox + label .checkbox-icon {
   width: 24px;
   height: 24px;
-  border: 2px solid #E0E0E0;
+  border: 1px solid #9B51E0;
   border-radius: 4px;
   display: flex;
   align-items: center;
@@ -42,12 +42,12 @@ label[for="checkbox"] {
 
 .checkbox:checked + label .checkbox-icon i {
   display: block;
-  background-color: #fff;
+  background-color: #9B51E0;
   color: #161D31;
   font-weight: bolder;
 }
 
 .checkbox:focus + label .checkbox-icon {
-  outline: 3px solid #007bff;
+  outline: 3px solid #fff;
   outline-offset: 2px;
 }

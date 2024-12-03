@@ -1,20 +1,13 @@
 import {ChangeDetectionStrategy, Component, DestroyRef, inject} from '@angular/core';
-import {ActivatedRoute, Params} from "@angular/router";
+import {ActivatedRoute} from "@angular/router";
 import {TasksService} from "../../services/tasks.service";
 import {BehaviorSubject} from "rxjs";
-import {takeUntilDestroyed} from "@angular/core/rxjs-interop";
-import {capitalizeFirstLetter} from "../../../../core/utils/capitalizeFirstLetter";
-import {CompleteTask} from "../../models/task";
-import {AsyncPipe} from "@angular/common";
-import {TasksListComponent} from "../../components/tasks-list/tasks-list.component";
-import {TasksSidenavComponent} from "../../components/tasks-sidenav/tasks-sidenav.component";
 import {TasksDataService} from "../../services/tasks-data.service";
+import {TasksSidenavComponent} from "@td/features/tasks/components";
 
 @Component({
   selector: 'td-tasks',
   imports: [
-    AsyncPipe,
-    TasksListComponent,
     TasksSidenavComponent
   ],
   templateUrl: './tasks.component.html',

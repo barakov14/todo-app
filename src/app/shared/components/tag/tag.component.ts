@@ -17,16 +17,19 @@ import {NgClass} from "@angular/common";
     styleUrl: './tag.component.scss',
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class TagComponent implements OnInit {
-  @Input() tag!: string
+export class TagComponent implements AfterContentInit {
 
-  content = viewChild.required<ElementRef<HTMLElement>>('content')
+  content = viewChild.required<ElementRef<HTMLParagraphElement>>('content')
   circleIcon = viewChild.required<ElementRef<HTMLElement>>('circleIcon')
 
 
-  ngOnInit() {
+  ngAfterContentInit() {
     const contentText = this.content()?.nativeElement.innerText;
+
     const circleIconEl = this.circleIcon().nativeElement;
+
+
+    console.log(contentText);
 
     switch (contentText) {
       case 'Продуктивность':
@@ -39,7 +42,7 @@ export class TagComponent implements OnInit {
         circleIconEl.classList.add('education')
         break;
       case 'Срочно':
-        circleIconEl.classList.add('urgent')
+        circleIconEl.classList.add('argent')
         break;
       default:
         circleIconEl.classList.add('productivity')

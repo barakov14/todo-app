@@ -1,21 +1,20 @@
-<!--
 <div class="container">
   <div class="header">
     <button tdButton (click)="onCreateTask()">Новая задача</button>
     <div class="menu">
-      <div class="menu__item" [routerLink]="['мои задачи']" routerLinkActive="active-link" [ngClass]="{'active-link-clear': isTriggered | async}">
+      <div class="menu__item">
         <i class="ri-mail-line"></i>
         <p>Мои задачи</p>
       </div>
-      <div class="menu__item" [routerLink]="['важные задачи']" routerLinkActive="active-link" [ngClass]="{'active-link-clear': isTriggered | async}">
+      <div class="menu__item">
         <i class="ri-star-line"></i>
         <p>Важные</p>
       </div>
-      <div class="menu__item" [routerLink]="['выполненные']" routerLinkActive="active-link" [ngClass]="{'active-link-clear': isTriggered | async}">
+      <div class="menu__item">
         <i class="ri-check-line"></i>
         <p>Выполненные</p>
       </div>
-      <div class="menu__item" [routerLink]="['удаленные']" routerLinkActive="active-link" [ngClass]="{'active-link-clear': isTriggered | async}">
+      <div class="menu__item">
         <i class="ri-delete-bin-7-line"></i>
         <p>Удаленные</p>
       </div>
@@ -24,12 +23,14 @@
   <div class="tags">
     <p class="tags__title">Тэги</p>
     <div>
-      <ul *ngFor="let item of tags">
-        <li class="tags__item" [ngClass]="{'selected': !(isTriggered | async) && (isSelected(item.tag) | async)}">
-&lt;!&ndash;          <components-tag [tag]="item.tag" (click)="onToggleTag(item.tag)"></components-tag>&ndash;&gt;
-        </li>
+      <ul>
+        @for(tag of tags; track tag) {
+          <li class="tags__item">
+            <td-tag>{{ tag }}</td-tag>
+          </li>
+        }
       </ul>
     </div>
   </div>
 </div>
--->
+

@@ -2,7 +2,6 @@ import {Directive, ElementRef, inject, Input, OnChanges, OnInit, Renderer2, Simp
 
 @Directive({
   selector: '[tdHighlight]',
-  standalone: true
 })
 
 export class HighlightDirective implements OnChanges {

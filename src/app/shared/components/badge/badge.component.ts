@@ -1,4 +1,4 @@
-import {ChangeDetectionStrategy, Component, ElementRef,OnInit, viewChild} from '@angular/core';
+import {AfterContentInit, ChangeDetectionStrategy, Component, ElementRef, viewChild} from '@angular/core';
 
 @Component({
     selector: 'td-badge',
@@ -6,11 +6,11 @@ import {ChangeDetectionStrategy, Component, ElementRef,OnInit, viewChild} from '
     styleUrl: './badge.component.scss',
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class BadgeComponent implements OnInit{
+export class BadgeComponent implements AfterContentInit{
 
   content = viewChild.required<ElementRef<HTMLDivElement>>('content')
 
-  ngOnInit() {
+  ngAfterContentInit() {
     const content = this.content().nativeElement;
 
     switch (content.innerText) {
