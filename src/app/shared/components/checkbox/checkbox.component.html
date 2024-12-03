@@ -1,0 +1,14 @@
+<input
+  type="checkbox"
+  class="checkbox"
+  id="checkbox"
+  [value]="value()"
+  (input)="onInput($event)"
+  (blur)="onTouched()"
+/>
+<label for="checkbox">
+  <span class="checkbox-icon">
+    <i class="ri-check-fill"></i>
+  </span>
+  <ng-content></ng-content>
+</label>
