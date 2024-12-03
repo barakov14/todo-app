@@ -21,7 +21,13 @@
     "lib": [
       "ES2022",
       "dom"
-    ]
+    ],
+    "paths": {
+      "@td/features/tasks/components": ["./src/app/features/components/index.ts"],
+      "@td/features/tasks/pages": ["./src/app/features/pages/index.ts"],
+      "@td/shared/components": ["./src/app/shared/components/index.ts"],
+      "@td/shared/directives": ["./src/app/shared/directives/index.ts"],
+    }
   },
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,

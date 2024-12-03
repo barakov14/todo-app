@@ -1,39 +1,27 @@
 import {ChangeDetectionStrategy, Component, inject} from '@angular/core';
-import {MatDialogModule, MatDialogRef} from "@angular/material/dialog";
 import {FormBuilder, FormControl, ReactiveFormsModule, Validators} from "@angular/forms";
 import {AsyncPipe, NgForOf, NgIf} from "@angular/common";
-import {MatCheckbox} from "@angular/material/checkbox";
 import {BehaviorSubject} from "rxjs";
-import { DatepickerComponent } from '../../../../shared/components/datepicker/datepicker.component';
-import { InputDirective } from '../../../../shared/components/input/input.directive';
 import { DateValidator } from '../../../../core/validators/date.validator';
-import { TextareaDirective } from '../../../../shared/components/input/textarea.directive';
-import { ButtonFilledComponent } from '../../../../shared/components/button-filled/button-filled.component';
-import { ButtonOutlineComponent } from '../../../../shared/components/button-outline/button-outline.component';
-import { tags } from '../../../../core/mock/tags.mock';
-import {CreateTask, TaskStatus, TaskStatusEnum } from '../../../../core/api-types/task';
+import {CreateTask, TaskStatus, TaskStatusEnum } from '../../models/task';
+import {DialogRef} from "@angular/cdk/dialog";
+import {ButtonDirective} from "@td/shared/directives";
 
 @Component({
-    selector: 'tasks-create-dialog',
-    imports: [
-        MatDialogModule,
-        DatepickerComponent,
-        ButtonFilledComponent,
-        ButtonOutlineComponent,
-        InputDirective,
-        ReactiveFormsModule,
-        NgIf,
-        MatCheckbox,
-        NgForOf,
-        TextareaDirective,
-        AsyncPipe
-    ],
+    selector: 'tasks-editor-dialog',
+  imports: [
+    ReactiveFormsModule,
+    NgIf,
+    NgForOf,
+    AsyncPipe,
+    ButtonDirective
+  ],
     templateUrl: './tasks-create-dialog.component.html',
     styleUrl: './tasks-create-dialog.component.scss',
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class TasksCreateDialogComponent {
-  private readonly dialogRef = inject(MatDialogRef)
+  private readonly dialogRef = inject(DialogRef)
 
 
   public formGroup = new FormBuilder().group({
@@ -69,6 +57,7 @@ export class TasksCreateDialogComponent {
         date: this.formGroup.value.date as Date,
       }
       this.validatorsError.next(false)
+
       this.dialogRef.close(data)
     } else {
       this.validatorsError.next(true)
@@ -94,5 +83,5 @@ export class TasksCreateDialogComponent {
     this.formGroup.controls.tags.setValue(this.tagsForm)
   }
 
-  protected readonly tags = tags;
+  // protected readonly tags = tags;
 }

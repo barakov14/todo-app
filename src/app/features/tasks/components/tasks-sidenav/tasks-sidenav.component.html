@@ -1,6 +1,7 @@
+<!--
 <div class="container">
   <div class="header">
-<!--    <tasks-create-button></tasks-create-button>-->
+    <button tdButton (click)="onCreateTask()">Новая задача</button>
     <div class="menu">
       <div class="menu__item" [routerLink]="['мои задачи']" routerLinkActive="active-link" [ngClass]="{'active-link-clear': isTriggered | async}">
         <i class="ri-mail-line"></i>
@@ -25,9 +26,10 @@
     <div>
       <ul *ngFor="let item of tags">
         <li class="tags__item" [ngClass]="{'selected': !(isTriggered | async) && (isSelected(item.tag) | async)}">
-<!--          <components-tag [tag]="item.tag" (click)="onToggleTag(item.tag)"></components-tag>-->
+&lt;!&ndash;          <components-tag [tag]="item.tag" (click)="onToggleTag(item.tag)"></components-tag>&ndash;&gt;
         </li>
       </ul>
     </div>
   </div>
 </div>
+-->

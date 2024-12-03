@@ -55,17 +55,17 @@
         <div class="form-field__checkbox">
           <div class="form-field__checkbox__column" *ngFor="let element of tags">
             <div class="form-field__checkbox__column__element">
-              <mat-checkbox (click)="onToggleTag(element.tag)">{{ element.tag }}</mat-checkbox>
+              <input type="checkbox" (click)="onToggleTag(element.tag)">{{ element.tag }}</input>
             </div>
           </div>
         </div>
       </div>
       <div class="form__actions">
         <div>
-          <ui-button-filled (click)="onCreateTask()">Добавить</ui-button-filled>
+          <button tdButton (click)="onCreateTask()">Добавить</button>
         </div>
         <div>
-          <ui-button-outline>Удалить</ui-button-outline>
+          <button tdButton>Удалить</button>
         </div>
       </div>
     </div>

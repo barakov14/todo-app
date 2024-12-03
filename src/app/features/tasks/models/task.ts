@@ -7,7 +7,8 @@ export interface CreateTask {
 }
 
 
-export interface Task {
+export interface Tasks {
+  id: number;
   name: string;
   date: Date;
   description: string;

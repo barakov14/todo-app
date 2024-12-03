@@ -1,11 +1,10 @@
-import {ChangeDetectionStrategy, Component, OnInit} from '@angular/core';
-import {SearchInputComponent} from "./shared/components/search-input/search-input.component";
-import {FormControl, ReactiveFormsModule} from "@angular/forms";
-import {DatepickerComponent} from "./shared/components";
+import {ChangeDetectionStrategy, Component} from '@angular/core';
+import {ReactiveFormsModule} from "@angular/forms";
+import {CheckboxComponent} from "./shared/components/checkbox/checkbox.component";
 
 @Component({
     selector: 'app-root',
-  imports: [SearchInputComponent, ReactiveFormsModule, DatepickerComponent],
+    imports: [ReactiveFormsModule, CheckboxComponent],
     templateUrl: './app.component.html',
     styleUrl: './app.component.scss',
     changeDetection: ChangeDetectionStrategy.OnPush

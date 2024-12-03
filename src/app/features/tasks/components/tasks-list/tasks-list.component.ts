@@ -5,13 +5,14 @@ import {
 } from '@angular/core';
 import {CdkDrag, CdkDragDrop, CdkDragHandle, CdkDropList, moveItemInArray} from "@angular/cdk/drag-drop";
 import {AsyncPipe, DatePipe, NgClass, NgFor, NgIf, SlicePipe} from "@angular/common";
-import {BehaviorSubject, map, Observable, of} from "rxjs";
+import {BehaviorSubject, map, Observable, of, switchMap} from "rxjs";
 import {FormControl, ReactiveFormsModule} from "@angular/forms";
 import {takeUntilDestroyed} from "@angular/core/rxjs-interop";
 import { HighlightDirective } from '../../../../shared/directives/highlight/highlight.directive';
-import {CompleteTask, Task, TaskStatusEnum } from '../../../../core/api-types/task';
-import { PersistenceService } from '../../../../core/utils/persistence.service';
+import {CompleteTask, Tasks, TaskStatusEnum } from '../../models/task';
 import { TasksService } from '../../services/tasks.service';
+import {TasksDeleteDialogComponent} from "../tasks-delete-dialog/tasks-delete-dialog.component";
+import {Dialog, DialogRef} from "@angular/cdk/dialog";
 
 @Component({
     selector: 'tasks-list',
@@ -33,7 +34,7 @@ import { TasksService } from '../../services/tasks.service';
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class TasksListComponent {
-  @Input() currentTasksPage!: string | null
+  /*@Input() currentTasksPage!: string | null
   @Input() tasksList!: Task[] | null
   @Input() selectedTags!: string[] | null | undefined
   @Output() filter = new EventEmitter<string>()
@@ -46,6 +47,7 @@ export class TasksListComponent {
 
   private readonly persistenceService = inject(PersistenceService)
   private readonly tasksService = inject(TasksService)
+  private readonly dialog = inject(Dialog)
   private readonly destroyRef = inject(DestroyRef)
 
 
@@ -94,7 +96,7 @@ export class TasksListComponent {
     }
   }
 
-  isImportant(task: Task): boolean {
+  isImportant(task: Tasks): boolean {
     return task && task.status && task.status.some((v) => v.value === TaskStatusEnum.importantTasks);
   }
 
@@ -158,6 +160,20 @@ export class TasksListComponent {
     return this.loadMoreTasks()?.length === this.tasksService.tasksList.value?.length
   }
 
+  openTasksDeleteDialog() {
+    const dialogRef =
+      this.dialog.open(TasksDeleteDialogComponent, {
+        hasBackdrop: true,
+      })
 
-  protected readonly TaskStatusEnum = TaskStatusEnum;
+    dialogRef.closed
+      .pipe(
+        // switchMap((data: boolean) => doSmth()),
+        takeUntilDestroyed(this.destroyRef),
+      )
+      .subscribe()
+  }
+
+
+  protected readonly TaskStatusEnum = TaskStatusEnum;*/
 }

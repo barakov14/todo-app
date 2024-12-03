@@ -5,8 +5,8 @@ export function DateValidator(
   control: AbstractControl,
 ): {[key: string]: any} | null {
   if (control.value instanceof Date) {
-    return null // Значение является типом Date
+    return null
   } else {
-    return {invalidDateType: {value: control.value}} // Значение не является типом Date
+    return {invalidDateType: {value: control.value}}
   }
 }

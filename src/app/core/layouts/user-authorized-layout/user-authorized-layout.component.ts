@@ -1,12 +1,12 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import {RouterOutlet} from "@angular/router";
-import {SidenavComponent} from "../../components/sidenav/sidenav.component";
+import {TasksSidenavComponent} from "../../../features/tasks/components/tasks-sidenav/tasks-sidenav.component";
 
 @Component({
   selector: 'td-user-authorized-layouts',
   imports: [
     RouterOutlet,
-    SidenavComponent
+    TasksSidenavComponent
   ],
   templateUrl: './user-authorized-layout.component.html',
   styleUrl: './user-authorized-layout.component.scss',
