@@ -3,9 +3,7 @@ import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {CreateTask, Tasks} from "../models/task";
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 export class TasksDataService {
   private readonly http = inject(HttpClient);
 
