@@ -75,8 +75,11 @@
 }
 
 .form-field__checkbox__column__element {
-  margin-bottom: 10px; /* Add some margin between elements */
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
 }
+
 .form-field__input__description {
   width: 100%;
 }

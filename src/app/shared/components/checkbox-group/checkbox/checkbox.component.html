@@ -1,14 +1,34 @@
-<input
-  type="checkbox"
-  class="checkbox"
-  id="checkbox"
-  [checked]="checkboxGroup?.isSelected(value()!) || checked()"
-  (click)="checkboxGroup?.toggleValue(value()!)"
-  (change)="toggleValue(!checked())"
-/>
-<label for="checkbox">
+@let val = value();
+
+@if(val) {
+  <input
+    type="checkbox"
+    class="checkbox"
+    [id]="val"
+    [checked]="checkboxGroup?.isSelected(val)"
+    (click)="checkboxGroup?.toggleValue(val!)"
+  />
+  <label [for]="val">
   <span class="checkbox-icon">
     <i class="ri-check-fill"></i>
   </span>
-  <ng-content></ng-content>
-</label>
+    <ng-container *ngTemplateOutlet="templateRef"/>
+  </label>
+} @else {
+  <input
+    type="checkbox"
+    class="checkbox"
+    #tdControl="tdControl"
+    tdControl
+    [id]="tdControl.control.value"
+    [checked]="!!tdControl.control.value"
+    (click)="toggleValue(tdControl.control.value)"
+  />
+  <label [for]="tdControl.control.value">
+  <span class="checkbox-icon">
+    <i class="ri-check-fill"></i>
+  </span>
+    <ng-container *ngTemplateOutlet="templateRef"/>
+  </label>
+}
+

@@ -8,9 +8,10 @@ import {ButtonDirective} from "@td/shared/directives";
 import {InputDirective} from "../../../../shared/directives/input/input.directive";
 import {CheckboxComponent} from "../../../../shared/components/checkbox-group/checkbox/checkbox.component";
 import {CheckboxGroupComponent} from "../../../../shared/components/checkbox-group/checkbox-group.component";
+import {DatepickerComponent} from "@td/shared/components";
 
 @Component({
-    selector: 'tasks-editor-dialog',
+  selector: 'tasks-editor-dialog',
   imports: [
     ReactiveFormsModule,
     NgIf,
@@ -19,6 +20,7 @@ import {CheckboxGroupComponent} from "../../../../shared/components/checkbox-gro
     InputDirective,
     CheckboxComponent,
     CheckboxGroupComponent,
+    DatepickerComponent,
   ],
     templateUrl: './tasks-editor-dialog.component.html',
     styleUrl: './tasks-editor-dialog.component.scss',
@@ -85,7 +87,6 @@ export class TasksEditorDialogComponent {
 
   onPickDate(date: Date) {
     this.formGroup.controls.date.setValue(date)
-    console.log(date)
   }
 
   onToggleTag(tag: string): void {
